@@ -1,9 +1,9 @@
 "use client";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LandingPage from '../components/LandingPage/homepage';
-import ShiqiPage from '../components/ShiqiHomePage/homepage'; 
-import JiaweiPage from '../components/JiaweiHomePage/homepage'; 
-import JinlingPage from '../components/JinlingHomePage/homepage';
+import ShiqiPage from '../components/ShiqiHomePage/sqpage'; 
+import JiaweiPage from '../components/JiaweiHomePage/jwpage'; 
+import JinlingPage from '../components/JinlingHomePage/jlpage';
 
 export default function Home() {
   return (

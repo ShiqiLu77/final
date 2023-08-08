@@ -1,15 +1,14 @@
 import { Link } from "react-router-dom";
-import './homepage.scss';
-
+import styles from './homepage.module.scss';
 
 export default function HomePage() {
   return (
-    <div className = "welcome">
+    <div className = {styles.welcome}>
       <h1>Welcome</h1>
       <nav>
-        <div><Link to="/sq">Page Shiqi</Link></div>
-        <div><Link to="/jw">Page Jiawei</Link></div>
-        <div><Link to="/jl">Page Jingling</Link></div>
+        <div className = {styles.a}><Link to="/sq">Page Shiqi</Link></div>
+        <div className = {styles.a}><Link to="/jw">Page Jiawei</Link></div>
+        <div className = {styles.a}><Link to="/jl">Page Jingling</Link></div>
       </nav>
     </div>
   );
