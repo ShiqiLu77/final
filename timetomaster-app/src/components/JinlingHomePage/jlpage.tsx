@@ -1,4 +1,4 @@
-import './jlpage.scss';
+import './jlpage.module.scss';
 
 
 export default function jlpage() {

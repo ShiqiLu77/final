@@ -1,4 +1,4 @@
-import './sqpage.scss';
+import './sqpage.module.scss';
 
 
 export default function sqpage() {

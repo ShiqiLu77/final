@@ -1,4 +1,4 @@
-import './jwpage.scss';
+import './jwpage.module.scss';
 
 
 export default function jwpage() {
