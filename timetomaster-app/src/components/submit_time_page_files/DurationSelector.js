@@ -1,41 +1,43 @@
+
 import React, { useState } from 'react';
 import styles from './submitTime.module.scss';
 
-const DurationSelector = () => {
+const DurationSelector = ({ onTimeSelected }) => {
   const [selectedDuration, setSelectedDuration] = useState(null);
-  const [customDuration, setCustomDuration] = useState('');
-  const [showInput, setShowInput] = useState(false);
 
-  const durations = ['5min', '10min', '25min', '30min', '45min', '60min', '1h 30min', '2h'];
+  const durations = ['1min', '5min', '10min', '25min', '30min', '45min', '60min', '2h', '5h', '20h', '50h', '100h'];
+
+  const handleDurationClick = (duration, index) => {
+    setSelectedDuration(index);
+    let minutes = 0;
+    if (duration.endsWith('h')) {
+      minutes = parseInt(duration.slice(0, -1)) * 60;
+    } else if (duration.endsWith('min')) {
+      minutes = parseInt(duration.slice(0, -3));
+    }
+    onTimeSelected(minutes);
+  };
 
   return (
     <div className={styles['duration-selector']}>
-      {durations.map((duration, index) => (
-        <button
-          key={index}
-          className={selectedDuration === index ? styles.selected : ''}
-          onClick={() => setSelectedDuration(index)}
-        >
-          {duration}
-        </button>
+      {Array.from({ length: 3 }).map((_, rowIndex) => (
+        <div key={rowIndex} className={styles.row}>
+          {durations.slice(rowIndex * 4, (rowIndex + 1) * 4).map((duration, index) => (
+            <div
+              key={index + rowIndex * 4}
+              className={selectedDuration === index + rowIndex * 4 ? styles.selected : styles.durationBox}
+              onClick={() => handleDurationClick(duration, index + rowIndex * 4)}
+            >
+              <div className={styles["duration-circle"]}>+</div>{duration}
+            </div>
+          ))}
+        </div>
       ))}
-      <button
-        className={styles.custom}
-        onClick={() => setShowInput(true)}
-      >
-        Others
-      </button>
-      {showInput && (
-        <input
-          type="text"
-          value={customDuration}
-          onChange={(e) => setCustomDuration(e.target.value)}
-          placeholder="Enter a duration"
-          className={styles['custom-input']}
-        />
-      )}
     </div>
   );
 };
 
 export default DurationSelector;
+
+
+
