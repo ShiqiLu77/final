@@ -9,6 +9,7 @@ export default function HomePage() {
         <div className = {styles.a} id = {styles.sq}><Link to="/sq">Page Shiqi</Link></div>
         <div className = {styles.a}><Link to="/jw">Page Jiawei</Link></div>
         <div className = {styles.a}><Link to="/jl">Page Jingling</Link></div>
+        <div className = {styles.a}><Link to="/submitTime">Page submit time</Link></div>
       </nav>
     </div>
   );
