@@ -67,13 +67,15 @@
 }
 
 .setting{
-    height: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+
+    height: 40px;
     width: 80px;
 
     img{
         height: 30px;
         width: 30px;
     }
-
-    
 }

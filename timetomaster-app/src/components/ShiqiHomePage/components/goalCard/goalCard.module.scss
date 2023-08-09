@@ -1,0 +1,18 @@
+.goalList{
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+  }
+  
+  .goalCard {
+    background-color: #e07777;
+    margin: 60px 40px;
+    border-radius: 20px;
+    padding: 15px 30px;
+    width: 280px;
+    height: 250px;
+    box-shadow: 0px 6px 6px rgba(0, 0, 0, 0.4);
+    display: grid;
+    grid-template-rows: 1fr 5fr 1fr;
+  }
+  

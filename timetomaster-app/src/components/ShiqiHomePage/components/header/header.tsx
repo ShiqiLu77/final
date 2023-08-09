@@ -1,7 +1,8 @@
 import styles from './header.module.scss';
 import React from 'react';
 import { Link } from "react-router-dom";
-import images from '../../images';
+import settingIcon from './settingicon.png';
+import Image from 'next/image';
 
 
 const habits = [
@@ -37,7 +38,7 @@ export default function sqpage() {
                 </div>
 
                 <div className={styles.setting}>
-                    <img src="./settingicon.png" alt="" />
+                    <Image src={settingIcon} alt="" width={30} height={30} />
                 </div>
             </div>
         </header>
