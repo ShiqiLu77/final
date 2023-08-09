@@ -1,0 +1,23 @@
+.edit-task-button {
+    width: 30%;
+    height: 85%;
+    background-color: #f6f7f2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+  
+    .image {
+      max-height: 70%;
+      max-width: 30%;
+      margin-right: 10px;
+    }
+  
+    .text {
+      font-size: 16px;
+      color: #333;
+    }
+  }
+  
