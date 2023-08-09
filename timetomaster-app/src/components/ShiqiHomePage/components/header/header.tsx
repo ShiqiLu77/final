@@ -4,14 +4,11 @@ import { Link } from "react-router-dom";
 import settingIcon from './settingicon.png';
 import Image from 'next/image';
 
+interface HeaderProps {
+    selectedTab: string; 
+}
 
-const habits = [
-    { id: 1, name: '学习Java' },
-    { id: 2, name: '学习Python' },
-    { id: 3, name: '学习英语' },
-];
-
-export default function sqpage() {
+export default function Header({ selectedTab }: HeaderProps) {
     return (
         <header className={styles.header}>
             <div className={styles.headerContent}>
@@ -20,21 +17,28 @@ export default function sqpage() {
                 </div>
 
                 <div className={styles.navbar}>
+
                     <div className={styles.tab}>
-                        <Link className="" to="/jw">
-                            Today
-                        </Link>
+                    <Link className={selectedTab === 'Today' ? styles.selectedLink : styles.normalLink} to="/jw">
+                        Today
+                    </Link>
                     </div>
                     <div className={styles.tab}>
-                        <Link className={styles.selectedLink} to="/jw">
-                            Goals
-                        </Link>
+                    <Link className={selectedTab === 'Goals' ? styles.selectedLink : styles.normalLink} to="/goals">
+                        Goals
+                    </Link>
                     </div>
                     <div className={styles.tab}>
-                        <Link className="" to="/jw">
-                            Achievement
-                        </Link>
+                    <Link className={selectedTab === 'Statistics' ? styles.selectedLink : styles.normalLink} to="/statistics">
+                        Statistics
+                    </Link>
                     </div>
+                    <div className={styles.tab}>
+                    <Link className={selectedTab === 'Achievement' ? styles.selectedLink : styles.normalLink} to="/jw">
+                        Achievement
+                    </Link>
+                    </div>
+
                 </div>
 
                 <div className={styles.setting}>

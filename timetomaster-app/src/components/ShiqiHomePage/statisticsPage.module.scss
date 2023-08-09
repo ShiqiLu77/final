@@ -1,0 +1,28 @@
+.pageContainer {
+  height: 100%;
+  background-color: #f6f7f2;
+}
+
+.mainContent {
+  display: grid;
+  grid-template-rows: 60px 1fr; 
+  align-items: center;
+  justify-content: center;
+
+  .goalList {
+   display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}
+
+.footContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  padding: 10px;
+}
