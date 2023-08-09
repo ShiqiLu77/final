@@ -11,6 +11,7 @@ export default function HomePage() {
         <div className = {styles.a}><Link to="/jl">Page Jingling</Link></div>
         <div className = {styles.a}><Link to="/submitTime">Page submit time</Link></div>
         <div className = {styles.a}><Link to="/tomato">tomato</Link></div>
+        <div className = {styles.a}><Link to="/taskDetail">taskDetail</Link></div>
       </nav>
     </div>
   );
