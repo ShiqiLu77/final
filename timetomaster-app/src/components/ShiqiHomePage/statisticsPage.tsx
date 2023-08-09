@@ -1,8 +1,6 @@
-import styles from './goalsPage.module.scss';
+import styles from './statisticsPage.module.scss';
 import React, { useState }  from 'react';
 import Header from './components/header/header';
-import TypeSelector from './components/typeSelector/typeSelector';
-import GoalCard from './components/goalCard/goalCard';
 
 
 
@@ -14,10 +12,38 @@ export default function sqpage() {
       <Header selectedTab={selectedTab} />
 
       <main className={styles.mainContent}>
-        <div></div>
-
-        <div className={styles.goalList}>
+        <div className = {styles.topBlock}>
+            <div className = {styles.overallContent}>
+                <h3>5H50min</h3>
+                <p>Total Time</p>
+            </div>
+            <div className = {styles.overallContent}>
+                <h3>2 days</h3>
+                <p>Steak</p>
+            </div>
+            <div className = {styles.overallContent}>
+                <h3>3</h3>
+                <p>Records</p>
+            </div>
         </div>
+
+        <div className={styles.bottomBlock}>
+            <div className={styles.chartContainer}>
+                <div className={styles.chartTime}>
+                    <div className = {styles.chartHeader}>
+                        <h2>Recent Time invested(min)</h2>
+                    </div>
+                </div>
+            </div>
+            <div className={styles.chartContainer}>
+                <div className={styles.chartType}>
+                    <div className = {styles.chartHeader}>
+                        <h2>Goals Time invested(min)</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+
       </main>
       
       <footer className="footer">

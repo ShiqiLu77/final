@@ -4,20 +4,63 @@
 }
 
 .mainContent {
+  width: 100%;
   display: grid;
-  grid-template-rows: 60px 1fr; 
+  grid-template-rows: 100px 1fr ; 
   align-items: center;
   justify-content: center;
 
-  .goalList {
-   display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
+  .topBlock{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+
+    .overallContent{
+      display: flex;
+      flex-direction: column;
+      align-items: center; 
+      margin: 0px 60px;
+
+      h3{
+        font-size: 20px;
+        font-weight: 600;
+      }
+
+      p{
+        color:#c7c7c5;
+      }
+    }
   }
+
+  .bottomBlock{
+    .chartContainer {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      background-color: #ffffff;
+
+      width: 600px;
+      height: 400px;
+      margin: 10px;
+      gap: 10px;
+
+      .chartTime, .chartType {
+        width: calc(50% - 10px); /* 两个组件一行，减去间距的一半 */
+        /* 其他样式 */
+      }
+
+      @media (max-width: 1200px) {
+        .chartContainer {
+          width: 100%; /* 一行一个组件 */
+        }
+      }
+    }
+  }
+
 }
+
+   
 
 .footContent {
   display: flex;
