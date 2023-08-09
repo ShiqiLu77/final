@@ -1,4 +1,4 @@
-import styles from './sqpage.module.scss';
+import styles from './goalsPage.module.scss';
 import React from 'react';
 import Header from './components/header/header';
 import TypeSelector from './components/typeSelector/typeSelector';
@@ -17,7 +17,14 @@ export default function sqpage() {
       <main className={styles.mainContent}>
         <TypeSelector/>
 
-        <GoalCard/>
+        <div className={styles.goalList}>
+          <GoalCard/>
+          <GoalCard/>
+          <GoalCard/>
+          <GoalCard/>
+          <GoalCard/>
+          <GoalCard/>
+        </div>
       </main>
       
       <footer className="footer">

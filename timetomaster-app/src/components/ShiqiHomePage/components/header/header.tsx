@@ -31,6 +31,11 @@ export default function sqpage() {
                         </Link>
                     </div>
                     <div className={styles.tab}>
+                        <Link className="" to="/statistics">
+                            Statistics
+                        </Link>
+                    </div>
+                    <div className={styles.tab}>
                         <Link className="" to="/jw">
                             Achievement
                         </Link>

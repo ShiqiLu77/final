@@ -6,7 +6,17 @@
 .mainContent {
   display: grid;
   grid-template-rows: 60px 1fr; 
-  height: 100vh; 
+  align-items: center;
+  justify-content: center;
+
+  .goalList {
+   display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
 }
 
 .footContent {
