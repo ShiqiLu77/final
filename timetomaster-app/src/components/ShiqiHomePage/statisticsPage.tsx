@@ -1,11 +1,25 @@
 import styles from './statisticsPage.module.scss';
 import React, { useState }  from 'react';
 import Header from './components/header/header';
+import Histogram from './components/histogram/histogram';
 
 
 
-export default function sqpage() {
+export default function StatisticsPage() {
     const [selectedTab, setSelectedTab] = useState('Statistics');
+
+    const fakedata = [
+        { day: 'Mon', hours: 4 },
+        { day: 'Tue', hours: 5 },
+        { day: 'Wed', hours: 3 },
+        { day: 'Thu', hours: 6 },
+        { day: 'Fri', hours: 2 },
+        { day: 'Sat', hours: 4 },
+        { day: 'Sun', hours: 3 },
+        { day: 'Sun', hours: 3 },
+        { day: 'Sun', hours: 3 },
+        { day: 'Sun', hours: 3 },
+      ];
 
   return (
     <div className= {styles.pageContainer}>
@@ -29,18 +43,20 @@ export default function sqpage() {
 
         <div className={styles.bottomBlock}>
             <div className={styles.chartContainer}>
-                <div className={styles.chartTime}>
-                    <div className = {styles.chartHeader}>
-                        <h2>Recent Time invested(min)</h2>
+                    <div className = {styles.chartTitle}>
+                        <h2>Recent Time invested &nbsp;</h2> <p>(min)</p>
                     </div>
-                </div>
+                    <div className = {styles.chartContent}>
+                        <Histogram data={fakedata}/>    
+                    </div>
             </div>
             <div className={styles.chartContainer}>
-                <div className={styles.chartType}>
-                    <div className = {styles.chartHeader}>
-                        <h2>Goals Time invested(min)</h2>
+                    <div className = {styles.chartTitle}>
+                        <h2>Goals Time invested &nbsp;</h2> <p>(min)</p>
                     </div>
-                </div>
+                    <div className = {styles.chartContent}>
+                        <Histogram data={fakedata}/>    
+                    </div>
             </div>
         </div>
 

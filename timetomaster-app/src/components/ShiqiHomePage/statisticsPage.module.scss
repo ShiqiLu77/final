@@ -14,6 +14,8 @@
     width: 100%;
     display: flex;
     flex-direction: row;
+    align-items: center;
+    justify-content: center;
 
     .overallContent{
       display: flex;
@@ -33,27 +35,43 @@
   }
 
   .bottomBlock{
+    width: 1200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
     .chartContainer {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
       background-color: #ffffff;
+      width: 1000px; 
+      min-height:500px;
+      margin: 20px; 
+      border-radius: 10px;
+      border: 1px dashed  #cbcbc3;
+      padding: 20px 30px;
 
-      width: 600px;
-      height: 400px;
-      margin: 10px;
-      gap: 10px;
+      .chartTitle{
+        display: flex;
+        align-items: baseline;
+        justify-content: start;
+        h2{
+          font-size: 20px;
+          font-weight: 700;
+          margin-bottom: 20px;
+        }
+        p{
+          font-size: 18px;
+          color: #b5b5b5;
 
-      .chartTime, .chartType {
-        width: calc(50% - 10px); /* 两个组件一行，减去间距的一半 */
-        /* 其他样式 */
+        }
       }
 
-      @media (max-width: 1200px) {
-        .chartContainer {
-          width: 100%; /* 一行一个组件 */
-        }
+      .chartContent{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        margin: 10px 0px;
       }
     }
   }

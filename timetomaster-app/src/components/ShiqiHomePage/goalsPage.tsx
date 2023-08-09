@@ -4,7 +4,7 @@ import Header from './components/header/header';
 import TypeSelector from './components/typeSelector/typeSelector';
 import GoalCard from './components/goalCard/goalCard';
 
-export default function sqpage() {
+export default function GoalsPage() {
   const [selectedTab, setSelectedTab] = useState('Goals')
   return (
     <div className= {styles.pageContainer}>
