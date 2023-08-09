@@ -3,11 +3,6 @@ import React, { useState } from 'react';
 import Header from './components/header/header';
 import TypeSelector from './components/typeSelector/typeSelector';
 import GoalCard from './components/goalCard/goalCard';
-// const habits = [
-//   { id: 1, name: '学习Java' },
-//   { id: 2, name: '学习Python' },
-//   { id: 3, name: '学习英语' },
-// ];
 
 export default function sqpage() {
   const [selectedTab, setSelectedTab] = useState('Goals')
