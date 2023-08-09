@@ -1,12 +1,12 @@
 .page-container {
-  background: linear-gradient(to right, #f5f7fa, #e8ebee);
+  background-color: #f6f7f2;
   font-family: 'Arial', sans-serif;
   min-height: 100vh; /* Full viewport height */
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-top: 60px; /* Increased padding to avoid overlap with TopBar */
-  width: 60%; /* Taking 60% of the viewport width */
+  width: 100%; /* Taking 60% of the viewport width */
   margin: 0 auto; /* Centering the container */
 }
 
@@ -103,58 +103,6 @@
   /* Increased margin */
 }
 
-.duration-selector {
-  display: flex;
-  flex-wrap: wrap; /* Allows wrapping into rows */
-  justify-content: center; /* Center items horizontally */
-  width: 100%; /* Total width to fit three buttons with margins */
-  margin: 20px auto;
-  justify-content: space-evenly;
-}
-
-.duration-selector button {
-  width: 30%; /* Fixed width */
-  margin: 5px; /* Margin around each button */
-  padding: 10px 0; /* Padding adjusted for fixed width */
-  background-color: #cccccc; /* Default color for unselected items */
-  color: black;
-  border: 1px solid #bbbbbb; /* Border color for unselected items */
-  cursor: pointer;
-  border-radius: 15px;
-  text-align: center; /* Center text */
-  transition: all 0.3s;
-
-  &.selected {
-    background-color: #32CD32; /* Green color for selected items */
-    color: white;
-    border: 1px solid #28a745; /* Border color for selected items */
-  }
-
-  &:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-}
-
-/* Styling for the custom duration button */
-.custom {
-  background-color: #f0f0f0; /* Light grey background */
-  color: black;
-  border: 1px solid #cccccc;
-  /* ... other styles similar to other buttons ... */
-}
-
-/* Styling for the custom duration input field */
-.custom-input {
-  display: block;
-  width: 60%; /* Width of the input field */
-  margin: 10px auto;
-  padding: 10px;
-  border: 1px solid #cccccc;
-  border-radius: 15px;
-}
-
-
-
 .confirm-button {
   display: block;
   margin: 30px auto;
@@ -193,3 +141,108 @@
   /* Added border */
   z-index: 1000;
 }
+
+.duration-selector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:not(:last-child) {
+      margin-bottom: 10px; // 小间隙
+    }
+  }
+
+  .durationBox,
+  .selected {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100px; // 宽度
+    height: 80px; // 高度
+    border-radius: 12px; // 圆角长方形
+    margin-right: 10px; // 小间隙
+    cursor: pointer;
+    transition: 0.3s all ease;
+    background-color: white; // 白色背景
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2); // 常在的框
+
+    &:not(:last-child) {
+      margin-right: 10px; // 小间隙
+    }
+
+    .duration-circle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px; // 圆圈大小缩小5倍
+      height: 30px;
+      border-radius: 50%;
+      background-color: #96a589; // 绿色圆圈
+      color: white; // 加号颜色
+      font-size: 6px; // 加号大小缩小5倍
+      font-weight: bold; // 加号厚度
+      margin-bottom: 5px;
+    }
+
+    &.selected {
+      animation: blink 0.5s linear; // 闪烁效果持续时间0.5秒
+    }
+  }
+
+  @keyframes blink {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+}
+
+
+
+.time-accumulator {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f0f0f0; // Light background to match the page
+  padding: 10px;
+  border-radius: 8px; // Rounded corners
+  opacity: 0; // Initially hidden
+  transition: opacity 0.5s ease; // Gradual fade-in/out effect
+
+  &.visible {
+    opacity: 1; // Visible when selected time
+  }
+
+  .time-display {
+    font-size: 16px; // Suitable font size for the time display
+    color: #333; // Dark text color
+  }
+
+  .reset-button {
+    background-color: #ff4d4d; // Red color for reset button
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px; // Rounded corners for the button
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #ff6666; // Lighter red on hover
+    }
+  }
+}
+
+
