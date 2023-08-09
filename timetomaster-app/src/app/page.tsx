@@ -5,16 +5,18 @@ import ShiqiPage from '../components/ShiqiHomePage/goalsPage';
 import StatisticsPage from '../components/ShiqiHomePage/statisticsPage';
 import JiaweiPage from '../components/JiaweiHomePage/jwpage'; 
 import JinlingPage from '../components/JinlingHomePage/jlpage';
-
+import SubmitTimePage from '../components/submit_time_page_files/SubmitTimePage';
 export default function Home() {
   return (
     <BrowserRouter>
       <Routes>
+        {/* <Route path="/" element={<LandingPage />} /> */}
         <Route path="/" element={<LandingPage />} />
         <Route path="/sq" element={<ShiqiPage />} />
         <Route path="/jw" element={<JiaweiPage />} />
         <Route path="/jl" element={<JinlingPage />} />
         <Route path="/statistics" element={<StatisticsPage />} />
+        <Route path="/submitTime" element={<SubmitTimePage />} />
       </Routes>
     </BrowserRouter>
   );

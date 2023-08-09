@@ -1,0 +1,195 @@
+.page-container {
+  background: linear-gradient(to right, #f5f7fa, #e8ebee);
+  font-family: 'Arial', sans-serif;
+  min-height: 100vh; /* Full viewport height */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 60px; /* Increased padding to avoid overlap with TopBar */
+  width: 60%; /* Taking 60% of the viewport width */
+  margin: 0 auto; /* Centering the container */
+}
+
+/* Other local styles remain the same */
+
+.page-title {
+  text-align: center;
+  font-size: 28px;
+  margin-top: 60px;
+  /* Increased margin */
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 60px;
+  width: 100%;
+  /* Increased padding */
+}
+
+
+.top-div {
+  background-color: #FFC1C1;
+  /* Light red background */
+  border-radius: 15px;
+  /* Rounded corners */
+  width: 100px;
+  /* Width of the rectangle */
+  height: 200px;
+  /* Height of the rectangle */
+  position: relative;
+  /* Relative positioning for inner elements */
+  margin: 0 auto;
+  /* Centering horizontally */
+
+  /* Ring design (outer circle) */
+  &::before {
+    content: '';
+    width: 70px;
+    /* Outer circle width */
+    height: 70px;
+    /* Outer circle height */
+    border-radius: 50%;
+    /* Rounded shape */
+    border: 10px solid #FFA07A;
+    /* Slightly lighter red color for outer ring */
+    position: absolute;
+    top: 25%;
+    /* Positioning the ring */
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  /* Ring design (inner circle) */
+  &::after {
+    content: '';
+    width: 50px;
+    /* Inner circle width */
+    height: 50px;
+    /* Inner circle height */
+    border-radius: 50%;
+    /* Rounded shape */
+    background-color: white;
+    /* White color for inner circle */
+    position: absolute;
+    top: 25%;
+    /* Positioning the ring */
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  /* Text styling */
+  span {
+    position: absolute;
+    top: 75%;
+    /* Positioning the text */
+    font-size: 14px;
+    color: black;
+    /* Text color */
+    text-align: center;
+    width: 100%;
+    /* Full width for centered text */
+  }
+}
+
+
+
+.date-display {
+  text-align: center;
+  font-size: 20px;
+  /* Increased font size */
+  margin: 20px 0;
+  /* Increased margin */
+}
+
+.duration-selector {
+  display: flex;
+  flex-wrap: wrap; /* Allows wrapping into rows */
+  justify-content: center; /* Center items horizontally */
+  width: 100%; /* Total width to fit three buttons with margins */
+  margin: 20px auto;
+  justify-content: space-evenly;
+}
+
+.duration-selector button {
+  width: 30%; /* Fixed width */
+  margin: 5px; /* Margin around each button */
+  padding: 10px 0; /* Padding adjusted for fixed width */
+  background-color: #cccccc; /* Default color for unselected items */
+  color: black;
+  border: 1px solid #bbbbbb; /* Border color for unselected items */
+  cursor: pointer;
+  border-radius: 15px;
+  text-align: center; /* Center text */
+  transition: all 0.3s;
+
+  &.selected {
+    background-color: #32CD32; /* Green color for selected items */
+    color: white;
+    border: 1px solid #28a745; /* Border color for selected items */
+  }
+
+  &:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* Styling for the custom duration button */
+.custom {
+  background-color: #f0f0f0; /* Light grey background */
+  color: black;
+  border: 1px solid #cccccc;
+  /* ... other styles similar to other buttons ... */
+}
+
+/* Styling for the custom duration input field */
+.custom-input {
+  display: block;
+  width: 60%; /* Width of the input field */
+  margin: 10px auto;
+  padding: 10px;
+  border: 1px solid #cccccc;
+  border-radius: 15px;
+}
+
+
+
+.confirm-button {
+  display: block;
+  margin: 30px auto;
+  padding: 15px 30px;
+  /* Increased padding */
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 15px;
+  font-size: 18px;
+  /* Increased font size */
+  transition: all 0.3s;
+  /* Added transition */
+
+  &:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* Added shadow on hover */
+  }
+}
+
+.top-bar {
+  background-color: white;
+  width: 100%;
+  text-align: center;
+  padding: 15px 0;
+  /* Increased padding */
+  position: fixed;
+  top: 0;
+  left: 0;
+  font-size: 20px;
+  /* Increased font size */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* Added shadow */
+  border-bottom: 1px solid #e0e0e0;
+  /* Added border */
+  z-index: 1000;
+}
