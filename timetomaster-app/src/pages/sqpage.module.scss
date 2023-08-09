@@ -1,27 +1,50 @@
 .pageContainer {
-    height: 100% rvh;
+    height: 100%;
     background-color: aqua;
   }
   
-  // .header {
-  //   /* Define the header styles */
-  // }
-  
-  // .navigation {
-  //   /* Define the navigation menu styles */
-  // }
-  
-  // .main-content {
-  //   /* Define the main content area styles */
-  // }
-  
-  // .section-one,
-  // .section-two,
-  // .section-three {
-  //   /* Define the individual section styles */
-  // }
-  
-  // .footer {
-  //   /* Define the footer styles */
-  // }
-  
+.headerContent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    background-color: rgb(3, 95, 78);
+    padding: 3px;
+
+    div{
+        padding: 5px 20px;
+    }
+}
+
+.typeSelector{
+  height: 60px;
+  background-color: rgb(182, 220, 213);
+
+}
+.goalList{
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    background-color: rgb(182, 220, 213);
+}
+
+.goalCard {
+    background-color: #e07777;
+    margin: 60px 40px;
+    border-radius: 20px;
+    padding: 15px 30px;
+    width: 280px;
+    height: 250px;
+    box-shadow: 0px 6px 6px rgba(0, 0, 0, 0.4);
+    display: grid;
+    grid-template-rows: 1fr 5fr 1fr;
+}
+
+.footContent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    background-color: rgb(203, 240, 233);
+    padding: 10px;
+}

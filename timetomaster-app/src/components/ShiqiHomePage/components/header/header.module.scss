@@ -1,0 +1,71 @@
+.header{
+
+}
+
+.headerContent {
+    display: flex;
+    flex-direction: row;
+    flex-shrink: 0;
+    justify-content: space-between;
+    height: 60px;
+    color:  #5f646d;
+    background-color: white;
+    font-size: 13px;
+    font-weight: 500;
+    -webkit-box-align: center;
+    align-items: center;
+    border-bottom: 1px solid rgb(239, 241, 244);
+    padding: 0px 15px;
+
+    div{
+        padding: 5px 8px;
+    }
+}
+
+
+.logo{
+    
+
+}
+
+.navbar{
+    display: flex;
+    flex-direction: row;
+    width : 800px !important;
+    align-content: center;
+    justify-content: center;
+
+}
+
+.tab{
+    width:auto;
+    text-decoration: none;
+    background-color: white;
+    border-radius: 4px;
+    padding: 5px 10px;
+    position: relative;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+}
+
+.selectedTab{
+
+}
+
+.selectedLink{
+    color: #373a40;
+    background-color:#dddeda;
+    border-radius: 4px;
+    padding: 6px 16px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.setting{
+    
+}

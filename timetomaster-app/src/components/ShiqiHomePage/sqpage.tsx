@@ -1,6 +1,6 @@
 import styles from './sqpage.module.scss';
 import React from 'react';
-
+import Header from './components/header/header';
 const habits = [
   { id: 1, name: '学习Java' },
   { id: 2, name: '学习Python' },
@@ -10,20 +10,26 @@ const habits = [
 export default function sqpage() {
   return (
     <div className= {styles.pageContainer}>
-      <header className="header">
-        <div className="header-content"></div>
-        hearder
-      </header>
-
-      <nav className="navigation">
-      </nav>
+      <Header/>
 
       <main className="main-content">
-        main
+        <div className = {styles.typeSelector}>
+        </div>
+        <div className = {styles.goalList}>
+          <div className = {styles.goalCard}>
+          </div>
+
+          <div className = {styles.goalCard}>
+          </div>
+
+          <div className = {styles.goalCard}>
+          </div>
+
+        </div>
 
       </main>
       <footer className="footer">
-        foot
+        <div className = {styles.footContent}>copyright@ 2023 northeastern university</div>
       </footer>
     </div>
   );
