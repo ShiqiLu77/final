@@ -10,12 +10,13 @@ export default function Home() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* <Route path="/" element={<LandingPage />} /> */}
         <Route path="/" element={<LandingPage />} />
+        {/* <Route path="/" element={<StatisticsPage />} /> */}
         <Route path="/sq" element={<ShiqiPage />} />
         <Route path="/jw" element={<JiaweiPage />} />
         <Route path="/jl" element={<JinlingPage />} />
         <Route path="/statistics" element={<StatisticsPage />} />
+        <Route path="/goals" element={<ShiqiPage />} />
         <Route path="/submitTime" element={<SubmitTimePage />} />
       </Routes>
     </BrowserRouter>
