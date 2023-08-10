@@ -1,40 +1,50 @@
 import styles from './goalCard.module.scss';
+
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import Image from 'next/image';
+
 import goalIcon from './goalicon.png';
 import GoalDetailModal from '../goalDetail/goalDetail'; 
 
+import Goal from '@/models/goal';
 
-export default function goalCard() {
+interface Props {
+    goal: Goal;
+    onGoalClick: (goal: Goal) => void;
+  }
+
+export default function goalCard(props: Props ) {
 
     const [isModalOpen, setIsModalOpen] = useState(false); // 添加状态
 
-    const openModal = () => {
-        setIsModalOpen(true); // 打开浮窗
+    const openModal = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+        props.onGoalClick(props.goal);
+        setIsModalOpen(true);
+        event.stopPropagation();
     };
 
     const closeModal = () => {
-        setIsModalOpen(false); // 关闭浮窗
+        setIsModalOpen(false); 
     };
 
     return (
-        <div className = {styles.goalCard}>
+        <div className = {styles.goalCard} id = {props.goal._id} onClick = {openModal} >
             <div className = {styles.icon}>
                 <Image src={goalIcon} alt ="" width={200} height={180} />
             </div>
 
             <div className = {styles.goalDetails}>
-                <div className = {styles.goalName}>Learning Java</div>
-                <div className = {styles.goalProgress}>Progress: 50%</div>
-                <div className = {styles.goalTime}>Estimated deadline：2021-12-31</div>
+                <div className = {styles.goalName}>{props.goal.title}</div>
+                <div className = {styles.goalProgress}>Progress: {props.goal.progress}</div>
+                <div className = {styles.goalTime}>Estimated deadline：{props.goal.expectedCompletionDate}</div>
             </div>
 
             <div className = {styles.completedTime}>
                 <div className = {styles.completedTimeText}>0 min</div>
             </div>
 
-            <GoalDetailModal isOpen={isModalOpen} onClose={closeModal} />
+            
         </div>
     );
 }
