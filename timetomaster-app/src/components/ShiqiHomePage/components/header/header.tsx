@@ -34,8 +34,8 @@ export default function Header({ selectedTab }: HeaderProps) {
                     </Link>
                     </div>
                     <div className={styles.tab}>
-                    <Link className={selectedTab === 'Achievement' ? styles.selectedLink : styles.normalLink} to="/jw">
-                        Achievement
+                    <Link className={selectedTab === 'Achievement' ? styles.selectedLink : styles.normalLink} to="/jl">
+                        Achievements
                     </Link>
                     </div>
 
