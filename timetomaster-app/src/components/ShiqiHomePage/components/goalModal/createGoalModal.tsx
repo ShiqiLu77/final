@@ -16,6 +16,7 @@ import goalIcon9 from './goalIcons/9.png';
 import goalIcon10 from './goalIcons/10.png';
 import goalIcon11 from './goalIcons/11.png';
 import goalIcon12 from './goalIcons/12.png';
+import Image from 'next/image';
 
 import { createGoal } from '../../../../services/goal-service';
 
@@ -29,6 +30,7 @@ const images = [goalIcon1, goalIcon2, goalIcon3, goalIcon4, goalIcon5, goalIcon6
   , goalIcon7, goalIcon8, goalIcon9, goalIcon10, goalIcon11, goalIcon12]
 
 export default function CreateGoalModal(props: Props) {
+  const [selectedImageIndex, setSelectedImageIndex] = React.useState<number | null>(null); // Added state for selected image index
   const [title, setTitle] = React.useState("");
   const [totalHours, setTotalHours] = React.useState("");
   const [expectedCompletionDate, setExpectedCompletionDate] = React.useState<string | null>(null);
@@ -39,12 +41,13 @@ export default function CreateGoalModal(props: Props) {
   const [selectedImage, setSelectedImage] = React.useState<string | null>(null);
 
   const handleSubmit = async () => {
-    if (title && totalHours && expectedCompletionDate) {
+    if (title && totalHours && expectedCompletionDate && selectedImageIndex) {
       const newGoal: GoalCreate = {
         title,
         totalHours,
         expectedCompletionDate,
         userId: '123456',
+        logo: selectedImageIndex,
       };
       try {
         const createdGoal = await createGoal(newGoal);
@@ -96,11 +99,13 @@ export default function CreateGoalModal(props: Props) {
         <div className={styles['select-logo']}>Please select a logo</div>
         <div className={styles['image-selection']}>
           {images.map((image, index) => (
-            <div className={styles['image-container']} key={index} onClick={() => setSelectedImage(image.src)}>
-              <img
-                src={image.src}
+            <div className={styles['image-container']} key={index} onClick={() => setSelectedImageIndex(index + 1)}>
+              <Image
+                src={image}
                 alt={`Image ${index}`}
-                className={selectedImage === image.src ? `${styles.image} ${styles.selected}` : styles.image}
+                width={200} // 设置适当的宽度
+                height={180} // 设置适当的高度
+                className={selectedImageIndex === (index + 1) ? `${styles.image} ${styles.selected}` : styles.image}
               />
             </div>
           ))}
