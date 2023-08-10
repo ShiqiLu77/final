@@ -6,6 +6,6 @@ import Image from 'next/image';
 
 export default function TypeCard() {
     return (
-        <div></div>
+        <div>1111</div>
     );
 }
