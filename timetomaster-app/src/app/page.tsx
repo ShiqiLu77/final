@@ -6,8 +6,13 @@ import GoalsPage from '../components/ShiqiHomePage/goalsPage';
 import StatisticsPage from '../components/ShiqiHomePage/statisticsPage';
 import JiaweiPage from '../components/JiaweiHomePage/jwpage'; 
 import JinlingPage from '../components/JinlingHomePage/jlpage';
-import CreateNewGoal from '../components/CreateNewGoal/CreateNewGoal';
+
+import SubmitTimePage from '../components/ShiqiHomePage/components/submit_time_page_files/SubmitTimePage';
+import TomatoClockDiv from '../components/ShiqiHomePage/components/TomatoClock/tomatoClockpage';
+import TaskDetailPage from '../components/ShiqiHomePage/components/editGoalModal/editGoalModal'
+import CreateNewGoal from '../components/CreateNewGoal/CreateNewGoal'
 import Calendar from '../components/Calendar/Calendar';
+
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false); // 添加状态
 
@@ -24,7 +29,8 @@ export default function Home() {
       <Routes>
         {/* <Route path="/" element={<LandingPage />} /> */}
         <Route path="/" element={<LandingPage />} />
-        {/* <Route path="/" element={<StatisticsPage />} /> */}
+
+        {/* <Route path="/" element={<GoalsPage />} /> */}
         <Route path="/sq" element={<GoalsPage />} />
         <Route path="/jw" element={<JiaweiPage />} />
         <Route path="/jl" element={<JinlingPage />} />
