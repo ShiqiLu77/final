@@ -1,5 +1,5 @@
-import styles from './goalDetail.module.scss';
 import React from 'react';
+import styles from './editGoalModal.module.scss';
 
 import TopDiv from './TopDiv';
 import TimeDayRecordDiv from './TimeDayRecordDiv';
@@ -15,12 +15,20 @@ interface Props {
   isOpen: boolean;
   goal: Goal | null;
   onClose: () => void;
-  // onSave: () => void;
-  // onDelete: () => void;
+  onSave: () => void;
+  onDelete: () => void;
 }
 
 const GoalDetailModal: React.FC<Props> = (props: Props) => {
   const imageSrc = 'path/to/your/image.png';
+
+
+  React.useEffect(() => {
+    // initializeModal();
+  }, [props.isOpen]); 
+
+
+
 
   if (!props.isOpen || !props.goal) {
     return null;

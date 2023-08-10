@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import Image from 'next/image';
 
 import goalIcon from './goalicon.png';
-import GoalDetailModal from '../goalDetail/goalDetail'; 
+import GoalDetailModal from '../editGoalModal/editGoalModal'; 
 
 import Goal from '@/models/goal';
 
@@ -37,7 +37,7 @@ export default function goalCard(props: Props ) {
             <div className = {styles.goalDetails}>
                 <div className = {styles.goalName}>{props.goal.title}</div>
                 <div className = {styles.goalProgress}>Progress: {props.goal.progress}</div>
-                <div className = {styles.goalTime}>Estimated deadline：{props.goal.expectedCompletionDate}</div>
+                <div className = {styles.goalTime}>Deadline：{props.goal.expectedCompletionDate}</div>
             </div>
 
             <div className = {styles.completedTime}>

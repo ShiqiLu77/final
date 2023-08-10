@@ -3,7 +3,8 @@ import PartialGoal from "../models/partial-goal";
 
 const baseURI = 'http://localhost:9001';
 
-export const getAll = async <Goal> (): Promise<Goal[]> => {
+export const getAll = async (): Promise<Goal[]> => {
+    console.log('fetching all goals');
     const url = '/goals';
     const response = await fetch( baseURI + url, {
         method: 'GET',
