@@ -10,5 +10,5 @@ export default interface Goal {
     expectedCompletionDate: string;
     createdAt: string;
     updatedAt: Date;
-    logo: Number;
+    logo: number;
 };
