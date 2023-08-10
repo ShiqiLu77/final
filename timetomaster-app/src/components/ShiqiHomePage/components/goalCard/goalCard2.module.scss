@@ -1,0 +1,70 @@
+.goalCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+  margin: 0px;
+  /* Center horizontally and add margin */
+  border-radius: 15px;
+  border: 1px dashed #cbcbc3;
+  padding: 15px 20px;
+  max-width: 230px;
+  /* Set maximum width */
+  min-width: 230px;
+  min-height: 300px;
+  max-height: 300px;
+}
+
+
+.icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 110px;
+  height: 160px;
+  border-radius: 50%;
+  background-color: #f6f7f2;
+  margin-right: 10px;
+  margin-left: 10px;
+  min-width: 110px;
+}
+
+
+.goalDetails {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 10px;
+  max-width: 100%;
+  height: 43px;
+
+  .goalName {
+    font-family: "Roboto", sans-serif;
+    font-size: 18px; 
+    font-weight: 700;
+    color: #000000;
+    margin-bottom: 10px;
+    min-width: 100%;
+    text-align: center;
+  }
+}
+
+
+.completeTime {
+  display: flex;
+  min-width: 180px;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5px;
+  .completedTimeText {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f6f7f2;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 15px;
+    font-weight: 700;
+  }
+}
