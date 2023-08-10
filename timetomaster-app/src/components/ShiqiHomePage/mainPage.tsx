@@ -7,6 +7,7 @@ import TypeSelector from './components/typeSelector/typeSelector';
 import GoalCardMain from './components/goalCard/goalCard2';
 import CreateGoalModal from './components/goalModal/createGoalModal';
 import EditGoalModal from './components/goalModal/editGoalModal';
+import Calendar from './components/calendar/calendar';
 
 import Goal from '@/models/goal';
 
@@ -16,7 +17,7 @@ export default function GoalsPage() {
 
   const [createModalOpen, setCreateModalOpen] = useState(false);
   const [editModalOpen, setEditModalOpen] = useState(false);
-  const [currentGoal, setCurrentGoal] = useState<Goal>(); 
+  const [currentGoal, setCurrentGoal] = useState<Goal>();
 
   const [selectedTab, setSelectedTab] = useState('Today');
 
@@ -85,7 +86,14 @@ export default function GoalsPage() {
           </div>
         </div>
 
-        <div className={styles.goalList}>{goalCards}</div>
+        <div className={styles.contentWrapper}> 
+          <div className={styles.goalListContainer}> 
+            <div className={styles.goalList}>{goalCards}</div>
+          </div>
+          <div className={styles.calendarContainer}>
+            <Calendar /> 
+          </div>
+        </div>
       </main>
 
       <footer className="footer">

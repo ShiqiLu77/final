@@ -5,11 +5,11 @@
 
 .mainContent {
   display: grid;
-  grid-template-rows: 80px 1fr; 
+  grid-template-rows: 80px 1fr;
   align-items: center;
   justify-content: center;
 
-  .selectorContainer{
+  .selectorContainer {
     padding: 10px 0px;
     display: flex;
     flex-direction: row;
@@ -27,7 +27,7 @@
       position: relative;
       cursor: pointer;
     }
-    
+
     .innerCircle {
       width: 36px;
       height: 36px;
@@ -37,7 +37,7 @@
       align-items: center;
       justify-content: center;
     }
-    
+
     .plusSign {
       font-size: 30px;
       color: white;
@@ -45,25 +45,44 @@
 
       line-height: 35px;
       text-align: center;
-      width: 100%; 
-      position: relative; // 设置为相对定位
-      top: -2px; // 可能需要微调这些值
-      left: 0px; // 根据您看到的偏移量
-    
+      width: 100%;
+      position: relative; 
+      top: -2px; 
+      left: 0px; 
+
     }
-    
-
-  }
-
-  .goalList {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    gap: 10px;
-    max-width: 1130px;
-    margin: 0 auto;
   }
 }
+
+.contentWrapper {
+  margin: 0 4%;
+  display: flex;
+  justify-content: space-evenly;
+
+
+  .goalListContainer {
+    .goalList {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      gap: 10px;
+      max-width: 1130px;
+      margin: 0 auto;
+    }
+    width: 70%;
+    min-width: 600px;
+  }
+
+  .calendarContainer {
+    min-width: 350px;
+    width: 22%;
+  }
+}
+
+
+
+
+
 
 .footContent {
   display: flex;

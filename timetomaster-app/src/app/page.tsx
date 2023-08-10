@@ -8,7 +8,6 @@ import JiaweiPage from '../components/JiaweiHomePage/jwpage';
 import JinlingPage from '../components/JinlingHomePage/jlpage';
 
 import MainPage from '../components/ShiqiHomePage/mainPage';
-import Calendar from '../components/Calendar/Calendar';
 
 export default function Home() {
   return (
@@ -21,7 +20,6 @@ export default function Home() {
         <Route path="/jl" element={<JinlingPage />} />
         <Route path="/statistics" element={<StatisticsPage />} />
         <Route path="/goals" element={<GoalsPage />} />
-        <Route path="/calendar" element={<Calendar />} />
 
         <Route path="/home" element={<MainPage />} />
 
