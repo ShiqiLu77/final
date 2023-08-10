@@ -3,9 +3,18 @@ import styles from './editGoalModal.module.scss';
 
 import Goal from '@/models/goal';
 
-import editTaskButtonImage from './editTaskButton.png';
-import deleteTaskButtonImage from './deteleTaskButton.png'
-import goalIcon from './goalicon.png'
+import goalIcon1 from './goalIcons/1.png';
+import goalIcon2 from './goalIcons/2.png';
+import goalIcon3 from './goalIcons/3.png';
+import goalIcon4 from './goalIcons/4.png';
+import goalIcon5 from './goalIcons/5.png';
+import goalIcon6 from './goalIcons/6.png';
+import goalIcon7 from './goalIcons/7.png';
+import goalIcon8 from './goalIcons/8.png';
+import goalIcon9 from './goalIcons/9.png';
+import goalIcon10 from './goalIcons/10.png';
+import goalIcon11 from './goalIcons/11.png';
+import goalIcon12 from './goalIcons/12.png';
 
 import { updateGoal, deleteGoal } from '../../../../services/goal-service';
 
@@ -16,9 +25,13 @@ interface Props {
   onSave: () => void;
   onDelete: () => void;
 }
-export default function EditGoalModal(props: Props) {
-  console.log("Props in EditGoalModal:", props);
 
+const images = [goalIcon1, goalIcon2, goalIcon3, goalIcon4, goalIcon5, goalIcon6
+  ,goalIcon7, goalIcon8, goalIcon9,goalIcon10, goalIcon11, goalIcon12]
+
+export default function EditGoalModal(props: Props) {
+
+  const [selectedImage, setSelectedImage] = React.useState<string | null>(null);
   const [title, setTitle] = React.useState("");
   const [totalHours, setTotalHours] = React.useState("");
   const [expectedCompletionDate, seteEpectedCompletionDate] = React.useState<string | null>(null);
@@ -80,58 +93,50 @@ export default function EditGoalModal(props: Props) {
 
   return (
     props.isOpen &&
-    <div className={styles['task-detail-page']}>
-      <div className={styles.container}>
-        <div className={styles['top-div']}>
-          <div className={styles.left}>
-            <img src={goalIcon.src} alt="Left Image" className={styles.image} />
-          </div>
+    <div className={styles['modal']}>
+      <div className={styles['modal-content']}>
+        <div className={styles['goal-title-div']}>
+          <span>Goal Title : </span>
+          <input type="text" id="edit-title" title="edit-title" value={title} onChange={(e) => setTitle(e.target.value)} />
+        </div>
+        <div className={styles['goal-time-div']}>
+          <span>Target Total Time: </span>
+          <input type="number" id="edit-description" title="edit-description"
+            value={totalHours}
+            onChange={(e) => setTotalHours(e.target.value)}
+          />
+          <span> Hours</span>
+        </div>
+        <div className={styles['goal-ddl-div']}>
+          <span>Expected completion date: </span>
+          {/* <input type="date" /> Date picker */}
+          {/* <input type="date" id="edit-time" title="edit-time" 
+          value = { expectedCompletionDate?.toString().slice(0, 16) } 
+          onChange = { (e) =>  seteEpectedCompletionDate(e.target.value) } 
+        /> */}
+                <input type="datetime-local" id="edit-time" title="edit-time" 
+          value = { expectedCompletionDate?.toString().slice(0, 16) } 
+          onChange = { (e) =>  seteEpectedCompletionDate(e.target.value) } 
+        />
+        </div>
 
-          <div className={styles.right}>
-            <div className={styles.textContainer}>
-              <input type="text" id="edit-title" title="edit-title" value={title} onChange={(e) => setTitle(e.target.value)} />
-              <label htmlFor="edit-description">Target Time:</label>
-              <input type="text" id="edit-description" title="edit-description"
-                value={totalHours}
-                onChange={(e) => setTotalHours(e.target.value)}
+        <div className={styles['select-logo']}>Please select a logo</div>
+        <div className={styles['image-selection']}>
+          {images.map((image, index) => (
+            <div className={styles['image-container']} key={index} onClick={() => setSelectedImage(image.src)}>
+              <img
+                src={image.src}
+                alt={`Image ${index}`}
+                className={selectedImage === image.src ? `${styles.image} ${styles.selected}` : styles.image}
               />
-              <div className={styles.subtitle}>target time: '10,000 hours' </div>
             </div>
-
-            <button className={styles.button}>
-              <div className={styles.square}>
-                <div className={styles.plus}>+</div>
-              </div>
-              <span className={styles.buttonText}>add accumulate time</span>
-            </button>
-          </div>
+          ))}
         </div>
 
-        <div className={styles['time-day-record-div']}>
-
+        <div className={styles['button-bar']}>
+          <button className={styles['cancel-button']} onClick={handleClose}>Cancel</button>
+          <button className={styles['submit-button']}>Done</button>
         </div>
-
-        <div className={styles['chart-div']}>
-
-        </div>
-
-
-        <div className={styles.buttonWrapper}>
-          {/* Add wrapper for buttons */}
-          <button className={styles['edit-task-button']}>
-            <img src={editTaskButtonImage.src} alt="Edit Task" className={styles.image} />
-            <span className={styles.text}>Edit</span>
-          </button>
-
-          <button className={styles['delete-task-button']}>
-            <img src={deleteTaskButtonImage.src} alt="Delete Task" className={styles.image} />
-            <span className={styles.text}>Delete</span>
-          </button>
-
-          <button onClick={handleClose}>Close</button>
-
-        </div>
-
       </div>
     </div>
   );

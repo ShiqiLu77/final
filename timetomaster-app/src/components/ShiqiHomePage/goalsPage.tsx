@@ -11,7 +11,6 @@ import Goal from '@/models/goal';
 
 
 export default function GoalsPage() {
-  const imageSrc = 'path/to/your/image.png';
 
   const [goals, setGoals] = useState<Goal[]>([]);
   // const [createModalOpen, setCreateModalOpen] = useState(false);
