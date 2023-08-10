@@ -4,10 +4,19 @@ import TimeDayRecordDiv from './TimeDayRecordDiv';
 import ChartDiv from './ChartDiv';
 import EditTaskButton from './EditTaskButton';
 import DeleteTaskButton from './DeleteTaskButton';
-import styles from './taskDetailPage.module.scss';
+import styles from './goalDetail.module.scss';
 
-const TaskDetailPage: React.FC = () => {
+interface GoalDetailModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+const GoalDetailModal: React.FC<GoalDetailModalProps> = ({ isOpen, onClose }) => {
   const imageSrc = 'path/to/your/image.png';
+  if (!isOpen) {
+    return null;
+  } 
+
   return (
     <div className={styles['task-detail-page']}>
       <div className={styles.container}>
@@ -18,8 +27,9 @@ const TaskDetailPage: React.FC = () => {
           <EditTaskButton />
           <DeleteTaskButton />
         </div>
+        <button onClick={onClose}>Close</button>
       </div>
     </div>
   );
 };
-export default TaskDetailPage;
+export default GoalDetailModal;
