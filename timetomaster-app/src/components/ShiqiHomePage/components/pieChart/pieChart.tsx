@@ -10,7 +10,7 @@ interface MonthlyPieChartProps {
   data: MonthlyData[];
 }
 
-export default function MonthlyPieChartProps ({ data }: MonthlyPieChartProps) {
+export default function MonthlyPieChart ({ data }: MonthlyPieChartProps) {
     const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#AB83A1', '#DD345E', '#AA1239'];
     const total = data.reduce((acc, item: MonthlyData) => acc + item.value, 0);
     
