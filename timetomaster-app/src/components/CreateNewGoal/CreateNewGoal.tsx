@@ -11,8 +11,8 @@ const images = [
     'path/to/image8.png',
     'path/to/image9.png'
   ];
-  
 
+  
 const CreateNewGoal: React.FC = () => {
     const [selectedImage, setSelectedImage] = React.useState<string | null>(null);
 
