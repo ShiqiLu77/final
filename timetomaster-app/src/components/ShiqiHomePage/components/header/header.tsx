@@ -19,7 +19,7 @@ export default function Header({ selectedTab }: HeaderProps) {
                 <div className={styles.navbar}>
 
                     <div className={styles.tab}>
-                    <Link className={selectedTab === 'Today' ? styles.selectedLink : styles.normalLink} to="/jw">
+                    <Link className={selectedTab === 'Today' ? styles.selectedLink : styles.normalLink} to="/home">
                         Today
                     </Link>
                     </div>
@@ -34,7 +34,7 @@ export default function Header({ selectedTab }: HeaderProps) {
                     </Link>
                     </div>
                     <div className={styles.tab}>
-                    <Link className={selectedTab === 'Achievement' ? styles.selectedLink : styles.normalLink} to="/jw">
+                    <Link className={selectedTab === 'Achievement' ? styles.selectedLink : styles.normalLink} to="/achievement">
                         Achievement
                     </Link>
                     </div>

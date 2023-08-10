@@ -1,6 +1,6 @@
-import styles from './goalsPage.module.scss';
+import styles from './mainPage.module.scss';
 import React, { useState, useEffect } from 'react';
-import { getAllGoal } from './../../services/goal-service';
+import { getAllGoal, updateGoal, deleteGoal } from './../../services/goal-service';
 
 import Header from './components/header/header';
 import TypeSelector from './components/typeSelector/typeSelector';
@@ -18,7 +18,7 @@ export default function GoalsPage() {
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [currentGoal, setCurrentGoal] = useState<Goal>(); // 用于存储选中的目标
 
-  const [selectedTab, setSelectedTab] = useState('Goals');
+  const [selectedTab, setSelectedTab] = useState('Today');
 
   // Display modal to edit goal
   const handleEdit = (goal: Goal) => {
