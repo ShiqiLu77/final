@@ -5,7 +5,10 @@ import TypeSelector from './components/typeSelector/typeSelector';
 import GoalCard from './components/goalCard/goalCard';
 
 export default function GoalsPage() {
-  const [selectedTab, setSelectedTab] = useState('Goals')
+  const [selectedTab, setSelectedTab] = useState('Goals');
+  const [isModalOpen, setIsModalOpen] = useState(false); // 添加浮窗状态
+  const [selectedGoal, setSelectedGoal] = useState(null); // 用于存储选中的目标
+  
   return (
     <div className= {styles.pageContainer}>
       <Header selectedTab={selectedTab} />
