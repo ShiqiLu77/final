@@ -5,16 +5,16 @@ import { getAllGoal, updateGoal, deleteGoal } from './../../services/goal-servic
 import Header from './components/header/header';
 import TypeSelector from './components/typeSelector/typeSelector';
 import GoalCard from './components/goalCard/goalCard';
-import EditGoalModal from './components/editGoalModal/editGoalModal';
+import CreateGoalModal from './components/goalModal/createGoalModal';
+import EditGoalModal from './components/goalModal/editGoalModal';
 
 import Goal from '@/models/goal';
 
 
 export default function GoalsPage() {
-
   const [goals, setGoals] = useState<Goal[]>([]);
-  // const [createModalOpen, setCreateModalOpen] = useState(false);
 
+  const [createModalOpen, setCreateModalOpen] = useState(false);
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [currentGoal, setCurrentGoal] = useState<Goal>(); // 用于存储选中的目标
 
@@ -22,16 +22,14 @@ export default function GoalsPage() {
 
   // Display modal to edit goal
   const handleEdit = (goal: Goal) => {
-    console.log("Handling edit! Goal:", goal);
     setCurrentGoal(goal);
     setEditModalOpen(true);
-    console.log("editModalOpen should now be true:", editModalOpen);
   };
 
   // Create new goal
   const handleCreate = (newGoal: Goal) => {
     setGoals([...goals, newGoal]);
-    // setCreateModalOpen(false);
+    setCreateModalOpen(false);
   };
 
   // Update a goal
@@ -52,7 +50,7 @@ export default function GoalsPage() {
     <GoalCard
       key={goal._id}
       goal={goal}
-      onGoalClick={() => handleEdit(goal)}
+      onEdit={() => handleEdit(goal)}
     ></GoalCard>);
 
   const fetchAllGoals = () => {
@@ -66,6 +64,7 @@ export default function GoalsPage() {
     console.log("editModalOpen changed:", editModalOpen);
   }, [editModalOpen]);
 
+  // search goal based on type progess/completed
   const [activeButton, setActiveButton] = useState('All');
 
   const handleButtonClick = (buttonLabel: string) => {
@@ -82,7 +81,7 @@ export default function GoalsPage() {
           <TypeSelector activeButton={activeButton} onButtonClick={handleButtonClick} />
           <div className={styles.addButton}>
             <div className={styles.innerCircle}>
-              <span className={styles.plusSign}>+</span>
+              <span className={styles.plusSign} onClick={() => setCreateModalOpen(true)}>+</span>
             </div>
           </div>
         </div>
@@ -93,6 +92,12 @@ export default function GoalsPage() {
       <footer className="footer">
         <div className={styles.footContent}>copyright@ 2023 northeastern university</div>
       </footer>
+
+      <CreateGoalModal  // NEW
+        isOpen={createModalOpen}
+        onClose={() => setCreateModalOpen(false)}
+        onCreate={handleCreate}
+      />
 
       <EditGoalModal
         isOpen={editModalOpen}

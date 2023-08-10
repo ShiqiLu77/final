@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import styles from './editGoalModal.module.scss';
-
+import styles from './createGoalModal.module.scss';
+import DatePicker from 'react-datepicker';
 import Goal from '@/models/goal';
+import GoalCreate from '@/models/goal-create';
 
 import goalIcon1 from './goalIcons/1.png';
 import goalIcon2 from './goalIcons/2.png';
@@ -16,77 +17,52 @@ import goalIcon10 from './goalIcons/10.png';
 import goalIcon11 from './goalIcons/11.png';
 import goalIcon12 from './goalIcons/12.png';
 
-import { updateGoal, deleteGoal } from '../../../../services/goal-service';
+import { createGoal } from '../../../../services/goal-service';
 
 interface Props {
   isOpen: boolean;
-  goal: Goal | null;
   onClose: () => void;
-  onSave: () => void;
-  onDelete: () => void;
+  onCreate: (goal: Goal) => void;
 }
 
 const images = [goalIcon1, goalIcon2, goalIcon3, goalIcon4, goalIcon5, goalIcon6
-  ,goalIcon7, goalIcon8, goalIcon9,goalIcon10, goalIcon11, goalIcon12]
+  , goalIcon7, goalIcon8, goalIcon9, goalIcon10, goalIcon11, goalIcon12]
 
-export default function EditGoalModal(props: Props) {
-
-  const [selectedImage, setSelectedImage] = React.useState<string | null>(null);
+export default function CreateGoalModal(props: Props) {
   const [title, setTitle] = React.useState("");
   const [totalHours, setTotalHours] = React.useState("");
-  const [expectedCompletionDate, seteEpectedCompletionDate] = React.useState<string | null>(null);
+  const [expectedCompletionDate, setExpectedCompletionDate] = React.useState<string | null>(null);
+
   const [submitError, setSubmitError] = React.useState<string | null>(null);
   const [formError, setFormError] = React.useState<string | null>(null);
 
-  React.useEffect(() => {
-    initializeModal();
-  }, [props.isOpen]);
+  const [selectedImage, setSelectedImage] = React.useState<string | null>(null);
 
-  const initializeModal = () => {
-    if (props.goal) {
-      const date = new Date(props.goal.expectedCompletionDate);
-      const localDateTime = new Date(date.getTime() - date.getTimezoneOffset() * 60 * 1000);
-      seteEpectedCompletionDate(localDateTime.toISOString().slice(0, 16));
-      setTitle(props.goal.title);
-      setTotalHours(props.goal.totalHours.toString());
+  const handleSubmit = async () => {
+    if (title && totalHours && expectedCompletionDate) {
+      const newGoal: GoalCreate = {
+        title,
+        totalHours,
+        expectedCompletionDate,
+        userId: '123456',
+      };
+      try {
+        const createdGoal = await createGoal(newGoal);
+        props.onCreate(createdGoal);
+        handleClose();
+      } catch (error) {
+        setSubmitError('Creating goal failed. Please try again.');
+      }
+    } else {
+      setFormError('Please fill in all required fields: title and due date.');
     }
-  };
+  }
 
-  // const handleSave = async () => {
-  //   if(title && dueDate && props.reminder) {
-  //     const updatedReminder :PartialReminder = {
-  //       title : title,
-  //       description : description,
-  //       dueDate: dueDate,
-  //     };
-  //     try{
-  //       await updateReminder(props.reminder._id, updatedReminder);
-  //       props.onSave();
-  //     } catch (error) {
-  //       setSubmitError('Updating reminder failed. Please try again.');
-  //     } 
-  //   }else {
-  //     setFormError('Please fill in all required fields: title and due date.');
-  //   }
-  // }
-
-
-  const handleClose = () => {
+  const handleClose = async () => {
     props.onClose();
-    resetForm();
-  }
-
-  const handleDelete = async () => {
-    if (!props.goal) { return; }
-    await deleteGoal(props.goal._id);
-    props.onDelete();
-    resetForm();
-  }
-
-  const resetForm = () => {
     setTitle('');
     setTotalHours('');
-    seteEpectedCompletionDate(null);
+    setExpectedCompletionDate(null);
     setFormError(null);
     setSubmitError(null);
   }
@@ -95,7 +71,9 @@ export default function EditGoalModal(props: Props) {
     props.isOpen &&
     <div className={styles['modal']}>
       <div className={styles['modal-content']}>
+
         <div className={styles['goal-title-div']}>
+          <h2>Create a new Goal</h2>
           <span>Goal Title : </span>
           <input type="text" id="edit-title" title="edit-title" value={title} onChange={(e) => setTitle(e.target.value)} />
         </div>
@@ -109,15 +87,10 @@ export default function EditGoalModal(props: Props) {
         </div>
         <div className={styles['goal-ddl-div']}>
           <span>Expected completion date: </span>
-          {/* <input type="date" /> Date picker */}
-          {/* <input type="date" id="edit-time" title="edit-time" 
-          value = { expectedCompletionDate?.toString().slice(0, 16) } 
-          onChange = { (e) =>  seteEpectedCompletionDate(e.target.value) } 
-        /> */}
-                <input type="datetime-local" id="edit-time" title="edit-time" 
-          value = { expectedCompletionDate?.toString().slice(0, 16) } 
-          onChange = { (e) =>  seteEpectedCompletionDate(e.target.value) } 
-        />
+          <input type="datetime-local" id="edit-time" title="edit-time"
+            value={expectedCompletionDate?.toString().slice(0, 16)}
+            onChange={(e) => setExpectedCompletionDate(e.target.value)}
+          />
         </div>
 
         <div className={styles['select-logo']}>Please select a logo</div>
@@ -135,8 +108,10 @@ export default function EditGoalModal(props: Props) {
 
         <div className={styles['button-bar']}>
           <button className={styles['cancel-button']} onClick={handleClose}>Cancel</button>
-          <button className={styles['submit-button']}>Done</button>
+          <button className={styles['submit-button']} onClick={handleSubmit}>Submit</button>
         </div>
+        {formError && <p className={styles.error}>{formError}</p>}
+        {submitError && <p className={styles.error}>{submitError}</p>}
       </div>
     </div>
   );
