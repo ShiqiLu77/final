@@ -24,8 +24,8 @@ export default function Home() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<LandingPage />} />
-        {/* <Route path="/" element={<GoalsPage />} /> */}
+        {/* <Route path="/" element={<LandingPage />} /> */}
+        <Route path="/" element={<GoalsPage />} />
         <Route path="/sq" element={<GoalsPage />} />
         <Route path="/jw" element={<JiaweiPage />} />
         <Route path="/jl" element={<JinlingPage />} />

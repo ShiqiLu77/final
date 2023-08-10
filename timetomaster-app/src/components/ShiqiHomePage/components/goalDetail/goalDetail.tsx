@@ -1,19 +1,28 @@
+import styles from './goalDetail.module.scss';
 import React from 'react';
+
 import TopDiv from './TopDiv';
 import TimeDayRecordDiv from './TimeDayRecordDiv';
 import ChartDiv from './ChartDiv';
 import EditTaskButton from './EditTaskButton';
 import DeleteTaskButton from './DeleteTaskButton';
-import styles from './goalDetail.module.scss';
 
-interface GoalDetailModalProps {
+import Goal from '@/models/goal';
+
+import { updateGoal, deleteGoal } from '../../../../services/goal-service';
+
+interface Props {
   isOpen: boolean;
+  goal: Goal | null;
   onClose: () => void;
+  // onSave: () => void;
+  // onDelete: () => void;
 }
 
-const GoalDetailModal: React.FC<GoalDetailModalProps> = ({ isOpen, onClose }) => {
+const GoalDetailModal: React.FC<Props> = (props: Props) => {
   const imageSrc = 'path/to/your/image.png';
-  if (!isOpen) {
+
+  if (!props.isOpen || !props.goal) {
     return null;
   } 
 
@@ -27,7 +36,7 @@ const GoalDetailModal: React.FC<GoalDetailModalProps> = ({ isOpen, onClose }) =>
           <EditTaskButton />
           <DeleteTaskButton />
         </div>
-        <button onClick={onClose}>Close</button>
+        <button onClick={props.onClose}>Close</button>
       </div>
     </div>
   );
