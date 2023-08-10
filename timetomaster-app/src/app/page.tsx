@@ -8,6 +8,7 @@ import JinlingPage from '../components/JinlingHomePage/jlpage';
 import SubmitTimePage from '../components/submit_time_page_files/SubmitTimePage';
 import TomatoClockDiv from '../components/TomatoClock/tomatoClockpage';
 import TaskDetailPage from '../components/taskDetail/taskDetailPage'
+import CreateNewGoal from '../components/CreateNewGoal/CreateNewGoal'
 export default function Home() {
   return (
     <BrowserRouter>
@@ -22,6 +23,7 @@ export default function Home() {
         <Route path="/submitTime" element={<SubmitTimePage />} />
         <Route path="/tomato" element={<TomatoClockDiv />} />
         <Route path="/taskDetail" element={<TaskDetailPage />} />
+        <Route path="/createNew" element={<CreateNewGoal />} />
       </Routes>
     </BrowserRouter>
   );
