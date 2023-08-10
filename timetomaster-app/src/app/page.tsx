@@ -9,6 +9,7 @@ import JinlingPage from '../components/JinlingHomePage/jlpage';
 import SubmitTimePage from '../components/ShiqiHomePage/components/submit_time_page_files/SubmitTimePage';
 import TomatoClockDiv from '../components/ShiqiHomePage/components/TomatoClock/tomatoClockpage';
 import TaskDetailPage from '../components/ShiqiHomePage/components/goalDetail/goalDetail'
+import CreateNewGoal from '../components/CreateNewGoal/CreateNewGoal'
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false); // 添加状态
 
@@ -32,7 +33,8 @@ export default function Home() {
         <Route path="/goals" element={<GoalsPage />} />
         <Route path="/submitTime" element={<SubmitTimePage />} />
         <Route path="/tomato" element={<TomatoClockDiv />} />
-        <Route path="/taskDetail" element={<TaskDetailPage isOpen={true} onClose={closeModal} />} />
+        <Route path="/taskDetail" element={<TaskDetailPage isOpen={true} onClose={closeModal}/>} />
+        <Route path="/createNew" element={<CreateNewGoal />} />
       </Routes>
     </BrowserRouter>
   );

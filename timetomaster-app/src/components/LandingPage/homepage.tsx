@@ -12,6 +12,7 @@ export default function HomePage() {
         <div className = {styles.a}><Link to="/submitTime">Page submit time</Link></div>
         <div className = {styles.a}><Link to="/tomato">tomato</Link></div>
         <div className = {styles.a}><Link to="/taskDetail">taskDetail</Link></div>
+        <div className = {styles.a}><Link to="/createNew">create new</Link></div>
       </nav>
     </div>
   );
