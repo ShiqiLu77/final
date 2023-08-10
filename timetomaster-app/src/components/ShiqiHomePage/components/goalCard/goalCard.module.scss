@@ -1,15 +1,10 @@
-.goalList{
-    display: flex;
-    flex-wrap: wrap;
-    align-content: flex-start;
-  }
 
   .goalCard {
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #ffffff;
-    margin: 10px 15px ; /* Center horizontally and add margin */
+    margin: 0px ; /* Center horizontally and add margin */
     border-radius: 15px;
     border: 1px dashed  #cbcbc3;
     padding: 15px 30px;
@@ -24,7 +19,6 @@
   }
   
 
-
   .icon{
     display: flex;
     justify-content: center;
@@ -34,6 +28,7 @@
     border-radius: 50%;
     background-color: #f6f7f2;
     margin-right:  10px;
+    min-width: 110px;
   }
 
 
@@ -51,7 +46,7 @@
 
   .completedTime{
     display: flex;
-    min-width: 100px;
+    min-width: 120px;
     justify-content: center;
     align-items: center;
 

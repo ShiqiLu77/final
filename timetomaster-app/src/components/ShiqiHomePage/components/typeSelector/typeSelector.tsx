@@ -1,11 +1,28 @@
 import styles from './typeSelector.module.scss';
 import React from 'react';
-import { Link } from "react-router-dom";
 import Image from 'next/image';
 
 
-export default function TypeSelector() {
+interface Props {
+    activeButton: string;
+    onButtonClick: (buttonLabel: string) => void;
+}
+
+
+export default function TypeSelector({ activeButton, onButtonClick }: Props) {
+    const buttons = ['All', 'Completed', 'Half Done', 'Nearly Done'];
+
     return (
-        <div></div>
+        <div className={styles.buttonBar}>
+            {buttons.map((buttonLabel) => (
+                <div
+                    key={buttonLabel}
+                    className={`${styles.button} ${activeButton === buttonLabel ? styles.active : ''}`}
+                    onClick={() => onButtonClick(buttonLabel)}
+                >
+                    {buttonLabel}
+                </div>
+            ))}
+        </div>
     );
 }

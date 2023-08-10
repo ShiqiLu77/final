@@ -9,5 +9,5 @@ export default interface Goal {
     completionDate: string;
     expectedCompletionDate: string;
     createdAt: string;
-    updatedAt: string;
+    updatedAt: Date;
 };
