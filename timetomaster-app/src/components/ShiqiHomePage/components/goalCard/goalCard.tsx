@@ -5,7 +5,7 @@ import Image from 'next/image';
 import goalIcon from './goalicon.png';
 
 
-export default function sqpage() {
+export default function goalCard() {
     return (
         <div className = {styles.goalCard}>
             <div className = {styles.icon}>

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import Image from 'next/image';
 
 
-export default function sqpage() {
+export default function TypeCard() {
     return (
         <div></div>
     );

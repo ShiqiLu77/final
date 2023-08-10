@@ -1,7 +1,8 @@
 import styles from './statisticsPage.module.scss';
 import React, { useState }  from 'react';
 import Header from './components/header/header';
-import Histogram from './components/histogram/histogram';
+import Histogram from './components/histoGram/histogram';
+import PieChart from './components/pieChart/pieChart';
 
 
 
@@ -21,6 +22,14 @@ export default function StatisticsPage() {
         { day: 'Sun', hours: 3 },
       ];
 
+      const data = [
+        { name: 'January', value: 400 },
+        { name: 'February', value: 300 },
+        { name: 'March', value: 300 },
+        // ... 其他月份
+      ];
+      
+
   return (
     <div className= {styles.pageContainer}>
       <Header selectedTab={selectedTab} />
@@ -28,7 +37,7 @@ export default function StatisticsPage() {
       <main className={styles.mainContent}>
         <div className = {styles.topBlock}>
             <div className = {styles.overallContent}>
-                <h3>5H50min</h3>
+                <h3>5H 50min</h3>
                 <p>Total Time</p>
             </div>
             <div className = {styles.overallContent}>
@@ -42,22 +51,8 @@ export default function StatisticsPage() {
         </div>
 
         <div className={styles.bottomBlock}>
-            <div className={styles.chartContainer}>
-                    <div className = {styles.chartTitle}>
-                        <h2>Recent Time invested &nbsp;</h2> <p>(min)</p>
-                    </div>
-                    <div className = {styles.chartContent}>
-                        <Histogram data={fakedata}/>    
-                    </div>
-            </div>
-            <div className={styles.chartContainer}>
-                    <div className = {styles.chartTitle}>
-                        <h2>Goals Time invested &nbsp;</h2> <p>(min)</p>
-                    </div>
-                    <div className = {styles.chartContent}>
-                        <Histogram data={fakedata}/>    
-                    </div>
-            </div>
+            <Histogram data={fakedata}/> 
+            <PieChart data={data}/> 
         </div>
 
       </main>
