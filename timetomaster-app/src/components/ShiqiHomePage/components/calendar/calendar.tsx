@@ -16,8 +16,7 @@ const Calendar: React.FC = () => {
     <div className={styles['page-container']}>
       <div className={styles['calendar']}>
         <div className={styles['top-bar']}>
-          <button className={styles['back-button']}>{'<'}</button>
-          <div className={styles['title']}> {/* 添加 .title 类 */}
+          <div className={styles['title']}>
             <span>Calendar</span>
           </div>
         </div>
