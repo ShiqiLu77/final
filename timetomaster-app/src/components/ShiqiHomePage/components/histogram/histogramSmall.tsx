@@ -1,113 +1,51 @@
 import styles from './histogramSmall.module.scss';
 import React from 'react';
-import { ComposedChart, BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, LabelList, Label, Brush, ReferenceLine, LineChart, Line } from 'recharts';
+import { ComposedChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, LabelList, ReferenceLine, LineChart, Line } from 'recharts';
 import { useState } from 'react';
 
-interface DayData {
-    day: string;
-    hours: number;
-}
+import DailyRecord from '@/models/record-daily';
 
 interface HistogramProps {
-    data: DayData[];
+    dailyRecords: DailyRecord[];
+    weeklyRecords: DailyRecord[];
+    monthlyRecords: DailyRecord[];
 }
 
-const fakeData = [
-    { "day": "2023-08-01", "hours": 8 },
-    { "day": "2023-08-02", "hours": 6 },
-    { "day": "2023-08-03", "hours": 6 },
-    { "day": "2023-08-04", "hours": 3 },
-    { "day": "2023-08-05", "hours": 7 },
-    { "day": "2023-08-06", "hours": 9 },
-    { "day": "2023-08-07", "hours": 4 },
-    { "day": "2023-08-08", "hours": 5 },
-    { "day": "2023-08-09", "hours": 8 },
-    { "day": "2023-07-01", "hours": 2 },
-    { "day": "2023-07-02", "hours": 6 },
-    { "day": "2023-07-03", "hours": 4 },
-    { "day": "2023-07-04", "hours": 3 },
-    { "day": "2023-07-05", "hours": 7 },
-    { "day": "2023-07-06", "hours": 9 },
-    { "day": "2023-07-07", "hours": 4 },
-    { "day": "2023-07-08", "hours": 5 },
-    { "day": "2023-07-09", "hours": 8 },
-    { "day": "2023-06-01", "hours": 2 },
-    { "day": "2023-06-02", "hours": 6 },
-    { "day": "2023-06-03", "hours": 4 },
-    { "day": "2023-06-04", "hours": 3 },
-    { "day": "2023-06-05", "hours": 7 },
-    { "day": "2023-06-06", "hours": 9 },
-    { "day": "2023-06-07", "hours": 4 },
-    { "day": "2023-06-08", "hours": 5 },
-    { "day": "2023-06-09", "hours": 8 },
-    { "day": "2023-05-01", "hours": 2 },
-    { "day": "2023-05-02", "hours": 6 },
-    { "day": "2023-05-03", "hours": 4 },
-    { "day": "2023-05-04", "hours": 3 },
-    { "day": "2023-05-05", "hours": 7 }
-]
-
-
-export default function Histogram({ data }: HistogramProps) {
-    const [selectedPeriod, setSelectedPeriod] = useState('day'); // 初始统计周期为日
+export default function HistogramSmall(props: HistogramProps) {
+    const [selectedPeriod, setSelectedPeriod] = useState('day');
 
     const handlePeriodChange = (newPeriod: string) => {
         setSelectedPeriod(newPeriod);
+        console.log("Daily Records:", props.weeklyRecords);
     };
 
     const getDataForPeriod = () => {
-        const today = new Date(); // 当前日期
-        const daysInPeriod = selectedPeriod === 'day' ? 10 : 7 * 10; // 根据周期确定天数
-
-        const filteredData = fakeData.filter((dataPoint) => {
-            const dataDate = new Date(dataPoint.day);
-            return dataDate >= new Date(today.getTime() - daysInPeriod * 24 * 60 * 60 * 1000);
-        });
-
-        // 对过滤后的数据进行排序，使日期近的排在前面
-        const sortedData = filteredData.sort((a, b) => {
-            return new Date(b.day).getTime() - new Date(a.day).getTime();
-        });
-
-        return sortedData;
-    };
-
-    const getXAxisLabel = () => {
-        const today = new Date();
-        const labels = [];
-
-        if (selectedPeriod === 'day') {
-            for (let i = 9; i >= 0; i--) {
-                const date = new Date(today.getTime() - i * 24 * 60 * 60 * 1000);
-                const month = date.getMonth() + 1;
-                const day = date.getDate();
-                labels.push(`${month}-${day}`);
-            }
-        } else if (selectedPeriod === 'week') {
-            for (let i = 9; i >= 0; i--) {
-                const startOfWeek = new Date(today.getTime() - i * 7 * 24 * 60 * 60 * 1000);
-                const endOfWeek = new Date(startOfWeek.getTime() + 6 * 24 * 60 * 60 * 1000);
-                const startMonth = startOfWeek.getMonth() + 1;
-                const startDay = startOfWeek.getDate();
-                const endMonth = endOfWeek.getMonth() + 1;
-                const endDay = endOfWeek.getDate();
-                labels.push(`${startMonth}-${startDay} - ${endMonth}-${endDay}`);
-            }
-        } else if (selectedPeriod === 'month') {
-            for (let i = 9; i >= 0; i--) {
-                const startOfMonth = new Date(today.getFullYear(), today.getMonth() - i, 1);
-                const endOfMonth = new Date(today.getFullYear(), today.getMonth() - i + 1, 0);
-                const startMonth = startOfMonth.getMonth() + 1;
-                const startDay = startOfMonth.getDate();
-                const endMonth = endOfMonth.getMonth() + 1;
-                const endDay = endOfMonth.getDate();
-                labels.push(`${startMonth}-${startDay} - ${endMonth}-${endDay}`);
-            }
+        let records :DailyRecord[];
+        switch (selectedPeriod) {
+            case 'day':
+                records = props.dailyRecords;
+                break;
+            case 'week':
+                records = props.weeklyRecords;
+                break;
+            case 'month':
+                records = props.monthlyRecords;
+                break;
+            default:
+                records = [];
+                break;
         }
-
-        return labels;
+        if (records.length > 0) {
+            return records.sort((a, b) => {
+                const dateA = new Date(a.recordsDate).getTime();
+                const dateB = new Date(b.recordsDate).getTime();
+                return dateB - dateA;
+            });
+        }else{
+            return records;
+        }
     };
-
+    
 
     return (
         <div className={styles.chartContainer}>
@@ -124,38 +62,44 @@ export default function Histogram({ data }: HistogramProps) {
                     <button className={`${styles.button} ${selectedPeriod === 'day' ? styles.selected : ''}`} onClick={() => handlePeriodChange('day')}>Day</button>
                     <button className={`${styles.button} ${selectedPeriod === 'week' ? styles.selected : ''}`} onClick={() => handlePeriodChange('week')}>Week</button>
                     <button className={`${styles.button} ${selectedPeriod === 'month' ? styles.selected : ''}`} onClick={() => handlePeriodChange('month')}>Month</button>
-
-
                 </div>
+
             </div>
             <div className={styles.chartContent}>
                 <div className={styles.histogram}>
                     <ComposedChart
                         className={styles.customChart}
                         width={360}
-                        height={200}
+                        height={250}
                         data={getDataForPeriod()}
-                        margin={{ top: 5, right: 10, left: 10, bottom: 5 }}
+                        margin={{ top: 15, right: 10, left: 10, bottom: 5 }}
                     >
                         <CartesianGrid strokeDasharray="3 3" stroke="#eee" />
-                        <XAxis dataKey="day" stroke="#494949" axisLine={false} tickLine={false}
-                        tick={{ fontSize: 12 }} 
+                        <XAxis dataKey="recordsDate" stroke="#494949" axisLine={false} tickLine={false}
+                            tick={{ fontSize: 12 }}
                             tickFormatter={(value) => {
                                 const date = new Date(value);
                                 const month = date.getMonth() + 1;
                                 const day = date.getDate();
-                                return `${month.toString()}-${day.toString()}`;
+                                return day ? `${month.toString()}-${day.toString()}` : `${month.toString()}`;
                             }}
                         >
                             <ReferenceLine y={0} stroke="#494949" />
                         </XAxis>
                         <YAxis stroke="#494949" axisLine={false} tickLine={false} tick={{ fontSize: 12 }} />
-                        <Tooltip contentStyle={{ backgroundColor: '#333', color: '#f3f3f2' }} />
-                        <Bar dataKey="hours" fill="#d1cd8e" barSize={10} >
-                            <LabelList dataKey="hours" position="top" />
+                        <Tooltip contentStyle={{ backgroundColor: '#333', color: '#f3f3f2' }}
+                            formatter={(value: number) => {
+                                return parseFloat(value.toFixed(2));
+                            }}
+                        />
+                        <Bar dataKey="totalHours" fill="#d1cd8e" barSize={10}>
+                            <LabelList dataKey="totalHours" position="top"
+                                formatter={(value: number) => parseFloat(value.toFixed(2))}
+                                fontSize={10}
+                            />
                         </Bar>
-                        <Line type="linear" dataKey="hours" stroke="#a7b798" 
-                        strokeWidth={1} dot={true} />
+                        <Line type="linear" dataKey="totalHours" stroke="#a7b798"
+                            strokeWidth={1} dot={true} />
                     </ComposedChart>
                 </div>
             </div>

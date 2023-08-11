@@ -1,38 +1,30 @@
 import styles from './mainPage.module.scss';
 import React, { useState, useEffect } from 'react';
-import { getAllGoal, updateGoal, deleteGoal } from './../../services/goal-service';
+import { getAllGoal } from './../../services/goal-service';
+import { getDailyByGid, getWeeklyByGid, getMonthlyByGid } from './../../services/record-service';
 
 import Header from './components/header/header';
 import GoalCardMain from './components/goalCard/goalCard2';
 import Calendar from './components/calendar/calendar';
-import CreateGoalModal from './components/goalModal/createGoalModal';
 import GoalDetail from './components/goalDetail/goalDetail';
+import CreateRecordGoalModal from './components/recordModal/createRecordModal';
 
 import Goal from '@/models/goal';
+import Record from '@/models/record';
+import DailyRecord from '@/models/record-daily';
 
-
-export default function GoalsPage() {
-  const [goals, setGoals] = useState<Goal[]>([]);
-
-  const [createModalOpen, setCreateModalOpen] = useState(false);
-  const [goalDetailOpen, setGoalDetailOpen] = useState(true);
-  const [currentGoal, setCurrentGoal] = useState<Goal>();
-
+export default function MainPage() {
   const [selectedTab, setSelectedTab] = useState('Today');
 
-  // Display modal to edit goal
-  const handleEdit = (goal: Goal) => {
-    console.log("handleEdit called with goal:", goal);
-    setCurrentGoal(goal);
-    setGoalDetailOpen(true);
-  };
+  const [goals, setGoals] = useState<Goal[]>([]);
+  const [records, setRecords] = useState<Record[]>([]);
+  const [daylyRecords, setDaylyRecords] = useState<DailyRecord[]>([]);
+  const [weeklyRecords, setWeeklyRecords] = useState<DailyRecord[]>([]);
+  const [monthlyRecords, setMonthlyRecords] = useState<DailyRecord[]>([]);
 
-  // Create new goal
-  const handleCreate = (newGoal: Goal) => {
-    setGoals([...goals, newGoal]);
-    setCreateModalOpen(false);
-  };
-
+  const [createRecordModalOpen, setCreateRecordModalOpen] = useState(false);
+  const [goalDetailOpen, setGoalDetailOpen] = useState(true);
+  const [currentGoal, setCurrentGoal] = useState<Goal>();
 
   // Fetch All goals
   const goalCards = goals.map((goal) =>
@@ -45,11 +37,56 @@ export default function GoalsPage() {
   const fetchAllGoals = () => {
     getAllGoal().then((items) => {
       setGoals(items);
+      if (items.length > 0 && currentGoal === undefined) { 
+        setCurrentGoal(items[0]);
+      }
     });
+  };
+
+  // Display modal to edit goal
+  const handleEdit = (goal: Goal) => {
+    setCurrentGoal(goal);
+    setGoalDetailOpen(true);
+  };
+
+  // Display modal to add record
+  const handleEditRecord = (goal: Goal) => {
+    setCurrentGoal(goal);
+    setCreateRecordModalOpen(true);
+  };
+
+  // Create new record
+  const handleCreateRecord = (newRecord: Record) => {
+    setRecords([...records, newRecord]);
+    setCreateRecordModalOpen(false);
+    fetchAllGoals();
+    fetchAllRecordsByGid();
+  };
+
+  // Fetch All records
+  const fetchAllRecordsByGid = () => {
+    if (currentGoal === undefined) {
+      return;
+    }else{
+      getDailyByGid(currentGoal._id).then((items) => {
+        setDaylyRecords(items);
+      });
+      getWeeklyByGid(currentGoal._id).then((items) => {
+        setWeeklyRecords(items);
+      });
+      getMonthlyByGid(currentGoal._id).then((items) => {
+        setMonthlyRecords(items);
+      });
+      console.log("Daily Records:", daylyRecords);
+      console.log("Weekly Records:", weeklyRecords);
+      console.log("Monthly Records:", monthlyRecords);
+    }
+
   };
 
   useEffect(() => {
     fetchAllGoals();
+    fetchAllRecordsByGid();
   }, [currentGoal, goalDetailOpen]);
 
 
@@ -59,11 +96,6 @@ export default function GoalsPage() {
 
       <main className={styles.mainContent}>
         <div className={styles.selectorContainer}>
-          <div className={styles.addButton}>
-            <div className={styles.innerCircle}>
-              <span className={styles.plusSign} onClick={() => setCreateModalOpen(true)}>+</span>
-            </div>
-          </div>
         </div>
 
         <div className={styles.contentWrapper}>
@@ -75,7 +107,12 @@ export default function GoalsPage() {
           <div className={styles.goalDetail}>
             <GoalDetail isOpen={goalDetailOpen}
               goal={currentGoal || null}
-              onClose={() => setGoalDetailOpen(false)} />
+              onClose={() => setGoalDetailOpen(false)}
+              addRecord = {handleEditRecord}
+              dailyRecords = {daylyRecords}
+            weeklyRecords = {weeklyRecords}
+            monthlyRecords= {monthlyRecords}
+            />
           </div>
           <div className={styles.calendarContainer}>
             <Calendar />
@@ -87,13 +124,10 @@ export default function GoalsPage() {
         <div className={styles.footContent}>copyright@ 2023 northeastern university</div>
       </footer>
 
-      <CreateGoalModal  // NEW
-        isOpen={createModalOpen}
-        onClose={() => setCreateModalOpen(false)}
-        onCreate={handleCreate}
-      />
+      <CreateRecordGoalModal goal={currentGoal || null}
+        isOpen={createRecordModalOpen}
+        onClose={() => setCreateRecordModalOpen(false)}
+        onSubmit={handleCreateRecord} />
     </div>
-
-
   );
 }

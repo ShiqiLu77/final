@@ -1,42 +1,41 @@
 import React, { useState, useEffect } from 'react';
 import styles from './goalDetail.module.scss';
 import Goal from '@/models/goal';
+import Record from '@/models/record';
 import Image from 'next/image';
 
-import goalIcon from './goalicon.png'
 import HistogramSmall from '../histogram/histogramSmall';
+import DailyRecord from '@/models/record-daily';
 
 interface Props {
   isOpen: boolean;
   goal: Goal | null;
   onClose: () => void;
+  addRecord :(goal: Goal) => void;
+  dailyRecords: DailyRecord[];
+  weeklyRecords: DailyRecord[];
+  monthlyRecords: DailyRecord[];
 }
 
 export default function GoalDetail(props: Props) {
-  const fakedata = [
-    { day: 'Mon', hours: 4 },
-    { day: 'Tue', hours: 5 },
-    { day: 'Wed', hours: 3 },
-    { day: 'Thu', hours: 6 },
-    { day: 'Fri', hours: 2 },
-    { day: 'Sat', hours: 4 },
-    { day: 'Sun', hours: 3 },
-    { day: 'Sun', hours: 3 },
-    { day: 'Sun', hours: 3 },
-    { day: 'Sun', hours: 3 },
-  ];
 
   const [title, setTitle] = React.useState("");
   const [goalIcon, setGoalIcon] = React.useState("");
   const [totalHours, setTotalHours] = React.useState("");
   const [expectedCompletionDate, seteEpectedCompletionDate] = React.useState<string | null>(null);
+  const [daylyRecords, setDaylyRecords] = useState<DailyRecord[]>([]);
+  const [weeklyRecords, setWeeklyRecords] = useState<DailyRecord[]>([]);
+  const [monthlyRecords, setMonthlyRecords] = useState<DailyRecord[]>([]);
+
+
+  const goalIcons = Array.from({ length: 12 }, (_, i) => require(`./goalicons/${i + 1}.png`));
+
+
 
   React.useEffect(() => {
     initializeModal();
   }, [props.goal]);
 
-  const goalIcons = Array.from({ length: 12 }, (_, i) => require(`./goalicons/${i + 1}.png`));
-  
   const initializeModal = () => {
     if (props.goal) {
       const date = new Date(props.goal.expectedCompletionDate);
@@ -45,17 +44,20 @@ export default function GoalDetail(props: Props) {
       setTitle(props.goal.title);
       setTotalHours(props.goal.totalHours.toString());
       const goalIcon = goalIcons[props.goal.logo - 1];
-
       setGoalIcon(goalIcon);
-    }else{
+      setDaylyRecords(props.dailyRecords);
+      setWeeklyRecords(props.weeklyRecords);
+      setMonthlyRecords(props.monthlyRecords);
+
+    } else {
       const goalIcon = goalIcons[1];
-
       setGoalIcon(goalIcon);
+            setDaylyRecords(props.dailyRecords);
+      setWeeklyRecords(props.weeklyRecords);
+      setMonthlyRecords(props.monthlyRecords);
     }
   };
-  
-  
-  
+
 
   return (
     <div className={styles['task-detail-page']}>
@@ -72,34 +74,35 @@ export default function GoalDetail(props: Props) {
               <div className={styles.subtitle}>Target Time: {totalHours} hours </div>
             </div>
 
-            <button className={styles.button}>
+            <button className={styles.button} onClick={() => props.addRecord(props.goal as Goal)}>
               <div className={styles.square}>
                 <div className={styles.plus}>+</div>
               </div>
-              <span className={styles.buttonText}>Add Invested Time</span>
+              <span className={styles.buttonText} >Add Invested Time</span>
             </button>
-            
+
           </div>
         </div>
 
         <div className={styles['time-day-record-div']}>
-            <div className = {styles.overallContent}>
-                <h3>5.5h</h3>
-                <p>Total Time</p>
-            </div>
-            <div className = {styles.overallContent}>
-                <h3>2d</h3>
-                <p>Steak</p>
-            </div>
-            <div className = {styles.overallContent}>
-                <h3>3</h3>
-                <p>Records</p>
-            </div>
+          <div className={styles.overallContent}>
+            <h3>5.5h</h3>
+            <p>Total Time</p>
+          </div>
+          <div className={styles.overallContent}>
+            <h3>2d</h3>
+            <p>Steak</p>
+          </div>
+          <div className={styles.overallContent}>
+            <h3>3</h3>
+            <p>Records</p>
+          </div>
         </div>
 
         <div className={styles['chart-div']}>
-          <HistogramSmall data={fakedata}/> 
-
+          <HistogramSmall dailyRecords = {daylyRecords}
+            weeklyRecords = {weeklyRecords}
+            monthlyRecords= {monthlyRecords} />
         </div>
 
       </div>

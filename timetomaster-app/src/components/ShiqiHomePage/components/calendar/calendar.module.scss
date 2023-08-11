@@ -78,6 +78,9 @@
 }
 
 .record-data-div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 10px 20px;
   border: 1px dashed  #cbcbc3;
   border-radius: 5px;
@@ -85,6 +88,14 @@
   cursor: pointer;
   transition: background-color 0.3s;
   margin: -1px 0;
+  p{
+    color: #585858;
+  }
+
+  h2{
+      font-weight: 700;
+  }
+
 }
 
 .record-data-div:hover {

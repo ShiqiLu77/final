@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import styles from './createGoalModal.module.scss';
-import DatePicker from 'react-datepicker';
 import Goal from '@/models/goal';
 import GoalCreate from '@/models/goal-create';
 

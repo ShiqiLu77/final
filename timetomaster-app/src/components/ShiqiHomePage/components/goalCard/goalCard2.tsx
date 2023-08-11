@@ -11,16 +11,9 @@ interface Props {
 
 export default function goalCard(props: Props) {
 
-    // const timestamp = new Date(props.goal.expectedCompletionDate);
-    // const expectedCompletionDate = timestamp.toLocaleDateString();
-
-    // const rawProgress = props.goal.progress * 100;
-    // const formattedProgress = rawProgress % 1 === 0 ? rawProgress.toFixed(0) + "%" : rawProgress.toFixed(1) + "%";
-
-
     const goalIcons = Array.from({ length: 12 }, (_, i) => require(`./goalicons/${i + 1}.png`));
     const goalIcon = goalIcons[props.goal.logo - 1];
-    
+
     const handleEdit = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         event.stopPropagation();
         props.onEdit(props.goal);
@@ -38,7 +31,11 @@ export default function goalCard(props: Props) {
 
 
             <div className={styles.completeTime}>
-                <div className={styles.completedTimeText}>{props.goal.investedHours} hours</div>
+                <div className={styles.completedTimeText}>
+                    {" "}
+                    {Number.isInteger(props.goal.investedHours)
+                        ? props.goal.investedHours
+                        : props.goal.investedHours.toFixed(2)}hours</div>
             </div>
 
 
