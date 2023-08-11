@@ -1,6 +1,6 @@
 import styles from './mainPage.module.scss';
 import React, { useState, useEffect } from 'react';
-import { getAllGoal, updateGoal } from './../../services/goal-service';
+import { getAllGoal } from './../../services/goal-service';
 import { getDailyByGid, getWeeklyByGid, getMonthlyByGid } from './../../services/record-service';
 
 import Header from './components/header/header';
@@ -14,19 +14,34 @@ import Record from '@/models/record';
 import DailyRecord from '@/models/record-daily';
 
 export default function MainPage() {
+  const [selectedTab, setSelectedTab] = useState('Today');
+
   const [goals, setGoals] = useState<Goal[]>([]);
   const [records, setRecords] = useState<Record[]>([]);
+  const [daylyRecords, setDaylyRecords] = useState<DailyRecord[]>([]);
+  const [weeklyRecords, setWeeklyRecords] = useState<DailyRecord[]>([]);
+  const [monthlyRecords, setMonthlyRecords] = useState<DailyRecord[]>([]);
 
   const [createRecordModalOpen, setCreateRecordModalOpen] = useState(false);
   const [goalDetailOpen, setGoalDetailOpen] = useState(true);
   const [currentGoal, setCurrentGoal] = useState<Goal>();
 
-  const [daylyRecords, setDaylyRecords] = useState<DailyRecord[]>([]);
-  const [weeklyRecords, setWeeklyRecords] = useState<DailyRecord[]>([]);
-  const [monthlyRecords, setMonthlyRecords] = useState<DailyRecord[]>([]);
+  // Fetch All goals
+  const goalCards = goals.map((goal) =>
+    <GoalCardMain
+      key={goal._id}
+      goal={goal}
+      onEdit={() => handleEdit(goal)}
+    ></GoalCardMain>);
 
-
-  const [selectedTab, setSelectedTab] = useState('Today');
+  const fetchAllGoals = () => {
+    getAllGoal().then((items) => {
+      setGoals(items);
+      if (items.length > 0 && currentGoal === undefined) { 
+        setCurrentGoal(items[0]);
+      }
+    });
+  };
 
   // Display modal to edit goal
   const handleEdit = (goal: Goal) => {
@@ -40,39 +55,32 @@ export default function MainPage() {
     setCreateRecordModalOpen(true);
   };
 
-
   // Create new record
   const handleCreateRecord = (newRecord: Record) => {
     setRecords([...records, newRecord]);
     setCreateRecordModalOpen(false);
   };
 
-  // Fetch All goals
-  const goalCards = goals.map((goal) =>
-    <GoalCardMain
-      key={goal._id}
-      goal={goal}
-      onEdit={() => handleEdit(goal)}
-    ></GoalCardMain>);
-
-  const fetchAllGoals = () => {
-    getAllGoal().then((items) => {
-      setGoals(items);
-    });
-  };
-
+  // Fetch All records
   const fetchAllRecordsByGid = () => {
-    getDailyByGid().then((items) => {
-      setDaylyRecords(items);
-    });
-    getWeeklyByGid().then((items) => {
-      setWeeklyRecords(items);
-    });
-    getMonthlyByGid().then((items) => {
-      setMonthlyRecords(items);
-    });
-  };
+    if (currentGoal === undefined) {
+      return;
+    }else{
+      getDailyByGid(currentGoal._id).then((items) => {
+        setDaylyRecords(items);
+      });
+      getWeeklyByGid(currentGoal._id).then((items) => {
+        setWeeklyRecords(items);
+      });
+      getMonthlyByGid(currentGoal._id).then((items) => {
+        setMonthlyRecords(items);
+      });
+      console.log("Daily Records:", daylyRecords);
+      console.log("Weekly Records:", weeklyRecords);
+      console.log("Monthly Records:", monthlyRecords);
+    }
 
+  };
 
   useEffect(() => {
     fetchAllGoals();
@@ -119,7 +127,5 @@ export default function MainPage() {
         onClose={() => setCreateRecordModalOpen(false)}
         onSubmit={handleCreateRecord} />
     </div>
-
-
   );
 }

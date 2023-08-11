@@ -35,12 +35,15 @@ export default function HistogramSmall(props: HistogramProps) {
                 records = [];
                 break;
         }
-    
-        return records.sort((a, b) => {
-            const dateA = new Date(a.recordsDate).getTime();
-            const dateB = new Date(b.recordsDate).getTime();
-            return dateB - dateA;
-        });
+        if (records.length > 0) {
+            return records.sort((a, b) => {
+                const dateA = new Date(a.recordsDate).getTime();
+                const dateB = new Date(b.recordsDate).getTime();
+                return dateB - dateA;
+            });
+        }else{
+            return records;
+        }
     };
     
 

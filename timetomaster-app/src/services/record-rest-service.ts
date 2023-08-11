@@ -73,6 +73,18 @@ export const searchByGid = async <DailyRecord> (url: string, query: any = {} ): 
     return records;
 }
 
+export const searchByDate = async <Record> (url: string, query: any = {} ): Promise<Record[]> => {
+    const params: URLSearchParams = new URLSearchParams(query);
+    const response = await fetch( baseURI + url + '?' + params, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+    const records: Record[] = (await response.json()) as Record[];
+    return records;
+}
+
 
 
 export const remove = async (id: string) => {
