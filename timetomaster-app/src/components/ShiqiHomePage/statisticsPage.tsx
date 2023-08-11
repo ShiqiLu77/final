@@ -37,11 +37,14 @@ export default function StatisticsPage() {
   }, []);
 
   const pieData = [
-    { name: 'January', value: 400 },
-    { name: 'February', value: 300 },
-    { name: 'March', value: 300 },
-    { name: 'Apil', value: 300 },
+    { name: 'LearnJava', value: 42 },
+    { name: 'Guitar Chords', value: 13.08 },
+    { name: 'Algorithm', value: 7.08 },
+    { name: 'Reading', value: 1.92 },
+    { name: 'Fitness', value: 1.33 },
+    { name: 'Mathmatic', value: 3.42 }
   ];
+
 
   return (
     <div className={styles.pageContainer}>
@@ -50,15 +53,15 @@ export default function StatisticsPage() {
       <main className={styles.mainContent}>
         <div className={styles.topBlock}>
           <div className={styles.overallContent}>
-            <h3>5H 50min</h3>
+            <h3>75H 35min</h3>
             <p>Total Time</p>
           </div>
           <div className={styles.overallContent}>
-            <h3>2 days</h3>
+            <h3>6 days</h3>
             <p>Steak</p>
           </div>
           <div className={styles.overallContent}>
-            <h3>3</h3>
+            <h3>{daylyRecords.length}</h3>
             <p>Records</p>
           </div>
         </div>

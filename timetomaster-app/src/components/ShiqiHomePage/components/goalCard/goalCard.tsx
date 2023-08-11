@@ -50,7 +50,10 @@ export default function goalCard(props: Props) {
 
 
             <div className={styles.completedTime}>
-                <div className={styles.completedTimeText}>0 min</div>
+                <div className={styles.completedTimeText}>{" "}
+                    {Number.isInteger(props.goal.investedHours)
+                        ? props.goal.investedHours
+                        : props.goal.investedHours.toFixed(2)} h</div>
             </div>
 
 

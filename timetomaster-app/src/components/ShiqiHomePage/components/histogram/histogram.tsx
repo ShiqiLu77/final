@@ -49,7 +49,7 @@ export default function Histogram( props: HistogramProps) {
         <div className={styles.chartContainer}>
             <div className={styles.chartHeader}>
                 <div className={styles.chartTitle}>
-                    <h2>Recent Time invested &nbsp;</h2> <p>(min)</p>
+                    <h2>Recent Time invested &nbsp;</h2> <p>(h)</p>
                 </div>
 
                 <div className={styles.buttonContainer}>
@@ -74,7 +74,7 @@ export default function Histogram( props: HistogramProps) {
                         width={800}
                         height={400}
                         data={getDataForPeriod()}
-                        margin={{ top: 15, right: 10, left: 10, bottom: 5 }}
+                        margin={{ top: 25, right: 10, left: 10, bottom: 5 }}
                     >
                         <CartesianGrid strokeDasharray="3 3" stroke="#eee" />
                         <XAxis dataKey="recordsDate" stroke="#494949" axisLine={false} tickLine={false}
