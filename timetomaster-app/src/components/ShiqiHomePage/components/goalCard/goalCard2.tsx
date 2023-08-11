@@ -2,8 +2,6 @@ import styles from './goalCard2.module.scss';
 
 import Image from 'next/image';
 
-import goalIcon from './goalicon.png';
-
 import Goal from '@/models/goal';
 
 interface Props {
@@ -20,6 +18,9 @@ export default function goalCard(props: Props) {
     // const formattedProgress = rawProgress % 1 === 0 ? rawProgress.toFixed(0) + "%" : rawProgress.toFixed(1) + "%";
 
 
+    const goalIcons = Array.from({ length: 12 }, (_, i) => require(`./goalicons/${i + 1}.png`));
+    const goalIcon = goalIcons[props.goal.logo - 1];
+    
     const handleEdit = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         event.stopPropagation();
         props.onEdit(props.goal);
@@ -28,7 +29,7 @@ export default function goalCard(props: Props) {
     return (
         <div className={styles.goalCard} id={props.goal._id} onClick={handleEdit} >
             <div className={styles.icon}>
-                <Image src={goalIcon} alt="" width={200} height={180} />
+                <Image src={goalIcon} alt="" width={100} height={100} />
             </div>
 
             <div className={styles.goalDetails}>

@@ -62,8 +62,8 @@
   width: 94%;
 
   .goalListContainer{
-    width: 480px;
-    min-width: 480px;
+    width: 420px;
+    min-width: 420px;
     margin-right: 10px;
 
     .goalList {
@@ -79,13 +79,13 @@
     width: 0;
     overflow: hidden;
     transition: width 0.5s;
-    min-width: 450px;
-    max-width: 450px;
+    min-width: 460px;
+    max-width: 460px;
   }
 
   .calendarContainer {
-    min-width: 300px;
-    width: 22%;
+    min-width: 350px;
+    width: 30%;
   }
 
 

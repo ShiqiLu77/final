@@ -16,7 +16,6 @@ export default function GoalsPage() {
 
   const [createModalOpen, setCreateModalOpen] = useState(false);
   const [goalDetailOpen, setGoalDetailOpen] = useState(true);
-  const [isGoalDetailVisible, setIsGoalDetailVisible] = useState(true);
   const [currentGoal, setCurrentGoal] = useState<Goal>();
 
   const [selectedTab, setSelectedTab] = useState('Today');
@@ -51,7 +50,7 @@ export default function GoalsPage() {
 
   useEffect(() => {
     fetchAllGoals();
-  }, [currentGoal, goalDetailOpen, isGoalDetailVisible]);
+  }, [currentGoal, goalDetailOpen]);
 
 
   return (

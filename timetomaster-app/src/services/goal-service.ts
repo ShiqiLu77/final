@@ -1,7 +1,7 @@
 import  {getAll, create, search, update, remove} from './rest-service';
 
 import Goal  from '../models/goal';
-import PartialGoal from "../models/partial-goal";
+import PartialGoal from "../models/goal-update";
 
 export const getAllGoal = async () => {
   const goals = await getAll();

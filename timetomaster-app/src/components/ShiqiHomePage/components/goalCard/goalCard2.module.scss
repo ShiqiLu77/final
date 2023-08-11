@@ -9,11 +9,11 @@
   border-radius: 15px;
   border: 1px dashed #cbcbc3;
   padding: 15px 20px;
-  max-width: 230px;
+  max-width: 200px;
   /* Set maximum width */
-  min-width: 230px;
-  min-height: 300px;
-  max-height: 300px;
+  min-width: 200px;
+  min-height: 240px;
+  max-height: 240px;
 }
 
 
@@ -22,7 +22,7 @@
   justify-content: center;
   align-items: center;
   width: 110px;
-  height: 160px;
+  height: 150px;
   border-radius: 50%;
   background-color: #f6f7f2;
   margin-right: 10px;
@@ -37,11 +37,11 @@
   align-items: center;
   margin: 10px 10px;
   max-width: 100%;
-  height: 43px;
+  height: 28px;
 
   .goalName {
     font-family: "Roboto", sans-serif;
-    font-size: 18px; 
+    font-size: 16px; 
     font-weight: 700;
     color: #000000;
     margin-bottom: 10px;
@@ -63,8 +63,8 @@
     align-items: center;
     background-color: #f6f7f2;
     border-radius: 5px;
-    padding: 10px 20px;
-    font-size: 15px;
+    padding: 5px 20px;
+    font-size: 14px;
     font-weight: 700;
   }
 }

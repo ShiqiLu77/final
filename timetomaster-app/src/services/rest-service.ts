@@ -1,5 +1,5 @@
 import Goal  from '../models/goal';
-import PartialGoal from "../models/partial-goal";
+import PartialGoal from "../models/goal-update";
 
 const baseURI = 'http://localhost:9001';
 
