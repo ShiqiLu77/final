@@ -5,11 +5,13 @@
 
 .mainContent {
   display: grid;
-  grid-template-rows: 80px 1fr; 
+  grid-template-rows: 100px 1fr; 
   align-items: center;
   justify-content: center;
 
   .selectorContainer{
+    width: 1200px;
+    min-width: 1200px;
     padding: 10px 0px;
     display: flex;
     flex-direction: row;
@@ -46,13 +48,11 @@
       line-height: 35px;
       text-align: center;
       width: 100%; 
-      position: relative; // 设置为相对定位
-      top: -2px; // 可能需要微调这些值
-      left: 0px; // 根据您看到的偏移量
+      position: relative; 
+      top: -2px; 
+      left: 0px; 
     
     }
-    
-
   }
 
   .goalList {
