@@ -1,7 +1,7 @@
 import styles from './statisticsPage.module.scss';
 import React, { useState }  from 'react';
 import Header from './components/header/header';
-import Histogram from './components/histoGram/histogram';
+import Histogram from './components/histogram/histogram';
 import PieChart from './components/pieChart/pieChart';
 
 

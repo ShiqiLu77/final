@@ -4,7 +4,7 @@ import Goal  from '../models/goal';
 import PartialGoal from "../models/partial-goal";
 
 export const getAllGoal = async () => {
-  const goals = await getAll<Goal>();
+  const goals = await getAll();
   return goals;
 }
 

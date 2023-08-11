@@ -1,0 +1,81 @@
+.container{
+    width: 100%;
+    padding: 10px;
+    margin: auto;
+} 
+.pageContainer {
+    height: 100%;
+    background-color: aqua;
+  }  
+
+.headerContent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    background-color: rgb(3, 95, 78);
+    padding: 3px;
+
+    div{
+        padding: 5px 20px;
+    }
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 130px minmax(0, 1fr); // divide to 2 columns, left 200px, right 1fr
+    height: 100vh;
+
+    >.toolbar {
+        background-color: #e2f2da;
+        display: flex;
+        justify-content: center;
+        padding: 10px;
+    }
+
+    >.grid-achievements {
+        background-color: white;
+        font-family: Comic Sans MS, cursive;
+        display: grid;
+        grid-template-rows: 110px minmax(0, 1fr);
+        padding: 10px 50px;
+
+        .bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 10px;
+        }
+
+        h1 {
+            font-size: 56px;
+            font-weight: lighter;
+            margin: 0px;
+            width: 300px;
+            padding: 10px 30px;
+        }
+
+        .achievement-container {
+            display: flex;
+            flex-wrap: wrap;
+            align-content: flex-start;
+        }
+    }
+}
+
+.button {
+    color: black;
+    text-decoration: none;
+    font-size: 100px;
+    font-weight: bolder;
+    height: 100px;
+}
+
+.footContent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70px;
+    margin: 20px;
+    padding: 10px;
+  }
