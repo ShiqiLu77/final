@@ -1,21 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import styles from './submitTime.module.scss';
+import styles from './createRecordModal.module.scss';
 
 
 const TimeAccumulator = ({ selectedTime, onReset }) => {
   const [isVisible, setIsVisible] = useState(false);
-  const [accumulatedTime, setAccumulatedTime] = useState(0);
 
   useEffect(() => {
     if (selectedTime) {
       setIsVisible(true);
-      setAccumulatedTime((prevTime) => prevTime + selectedTime);
+    } else {
+      setIsVisible(false);
     }
   }, [selectedTime]);
 
   const handleReset = () => {
-    setAccumulatedTime(0);
-    setIsVisible(false);
     if (onReset) onReset(); // Ensure onReset is provided
   };
 
@@ -28,7 +26,7 @@ const TimeAccumulator = ({ selectedTime, onReset }) => {
   return (
     <div className={`${styles['time-accumulator']} ${isVisible ? styles.visible : ''}`}>
       <div className={styles['time-display']}>
-        {formatTime(accumulatedTime)}
+        {formatTime(selectedTime)}
       </div>
       <button className={styles['reset-button']} onClick={handleReset}>
         Reset

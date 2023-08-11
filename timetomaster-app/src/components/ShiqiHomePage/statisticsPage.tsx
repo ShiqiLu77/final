@@ -1,30 +1,40 @@
 import styles from './statisticsPage.module.scss';
 import React, { useState, useEffect } from 'react';
 
-import { getAllRecord, searchRecord } from './../../services/record-service';
+import { getDailyByUid, getWeeklyByUid, getMonthlyByUid } from './../../services/record-service';
 
 import Header from './components/header/header';
 import Histogram from './components/histogram/histogram';
 import PieChart from './components/pieChart/pieChart';
 
-import Record from '@/models/record';
+import DailyRecord from '@/models/record-daily';
 
 export default function StatisticsPage() {
-  const [records, setRecords] = useState<Record[]>([]);
+  const [daylyRecords, setDaylyRecords] = useState<DailyRecord[]>([]);
+  const [weeklyRecords, setWeeklyRecords] = useState<DailyRecord[]>([]);
+  const [monthlyRecords, setMonthlyRecords] = useState<DailyRecord[]>([]);
 
   const [selectedTab, setSelectedTab] = useState('Statistics');
 
-  const fetchAllRecords = () => {
-    getAllRecord().then((items) => {
-      setRecords(items);
+  const fetchAllRecordsByUid = () => {
+    getDailyByUid().then((items) => {
+      setDaylyRecords(items);
+      console.log("statis Daily Records:", items);
+    });
+    getWeeklyByUid().then((items) => {
+      setWeeklyRecords(items);
+      console.log("statis Weekly Records:", items);
+    });
+    getMonthlyByUid().then((items) => {
+      setMonthlyRecords(items);
+      console.log("statis Monthly Records:", items);
     });
   };
 
   // Fetch All goals
   useEffect(() => {
-    fetchAllRecords();
+    fetchAllRecordsByUid();
   }, []);
-
 
   const pieData = [
     { name: 'January', value: 400 },
@@ -32,7 +42,6 @@ export default function StatisticsPage() {
     { name: 'March', value: 300 },
     { name: 'Apil', value: 300 },
   ];
-
 
   return (
     <div className={styles.pageContainer}>
@@ -55,7 +64,9 @@ export default function StatisticsPage() {
         </div>
 
         <div className={styles.bottomBlock}>
-          <Histogram records={records} />
+          <Histogram dailyRecords = {daylyRecords}
+            weeklyRecords = {weeklyRecords}
+            monthlyRecords= {monthlyRecords} />
           <PieChart data={pieData} />
         </div>
 

@@ -1,20 +1,22 @@
 import styles from './mainPage.module.scss';
 import React, { useState, useEffect } from 'react';
-import { getAllGoal, updateGoal, deleteGoal } from './../../services/goal-service';
+import { getAllGoal, updateGoal } from './../../services/goal-service';
 
 import Header from './components/header/header';
 import GoalCardMain from './components/goalCard/goalCard2';
 import Calendar from './components/calendar/calendar';
 import CreateGoalModal from './components/goalModal/createGoalModal';
 import GoalDetail from './components/goalDetail/goalDetail';
+import CreateRecordGoalModal from './components/submit_time_page_files/createRecordModal';
 
 import Goal from '@/models/goal';
+import Record from '@/models/record';
 
-
-export default function GoalsPage() {
+export default function MainPage() {
   const [goals, setGoals] = useState<Goal[]>([]);
 
   const [createModalOpen, setCreateModalOpen] = useState(false);
+  const [createRecordModalOpen, setCreateRecordModalOpen] = useState(false);
   const [goalDetailOpen, setGoalDetailOpen] = useState(true);
   const [currentGoal, setCurrentGoal] = useState<Goal>();
 
@@ -22,17 +24,27 @@ export default function GoalsPage() {
 
   // Display modal to edit goal
   const handleEdit = (goal: Goal) => {
-    console.log("handleEdit called with goal:", goal);
     setCurrentGoal(goal);
     setGoalDetailOpen(true);
   };
 
+  // Display modal to add record
+  const handleEditRecord = (goal: Goal) => {
+    setCurrentGoal(goal);
+    setCreateRecordModalOpen(true);
+  };
+
+
   // Create new goal
-  const handleCreate = (newGoal: Goal) => {
+  const handleCreateGoal = (newGoal: Goal) => {
     setGoals([...goals, newGoal]);
     setCreateModalOpen(false);
   };
 
+  // Create new record
+  const handleCreateRecord = (newRecord: Record) => {
+    setCreateRecordModalOpen(false);
+  };
 
   // Fetch All goals
   const goalCards = goals.map((goal) =>
@@ -61,7 +73,8 @@ export default function GoalsPage() {
         <div className={styles.selectorContainer}>
           <div className={styles.addButton}>
             <div className={styles.innerCircle}>
-              <span className={styles.plusSign} onClick={() => setCreateModalOpen(true)}>+</span>
+              <span className={styles.plusSign}
+                onClick={() => setCreateModalOpen(true)}>+</span>
             </div>
           </div>
         </div>
@@ -75,7 +88,9 @@ export default function GoalsPage() {
           <div className={styles.goalDetail}>
             <GoalDetail isOpen={goalDetailOpen}
               goal={currentGoal || null}
-              onClose={() => setGoalDetailOpen(false)} />
+              onClose={() => setGoalDetailOpen(false)}
+              addRecord = {handleEditRecord}
+            />
           </div>
           <div className={styles.calendarContainer}>
             <Calendar />
@@ -87,11 +102,16 @@ export default function GoalsPage() {
         <div className={styles.footContent}>copyright@ 2023 northeastern university</div>
       </footer>
 
-      <CreateGoalModal  // NEW
+      <CreateGoalModal
         isOpen={createModalOpen}
         onClose={() => setCreateModalOpen(false)}
-        onCreate={handleCreate}
+        onCreate={handleCreateGoal}
       />
+
+      <CreateRecordGoalModal goal={currentGoal || null}
+        isOpen={createRecordModalOpen}
+        onClose={() => setCreateRecordModalOpen(false)}
+        onSubmit={handleCreateRecord} />
     </div>
 
 

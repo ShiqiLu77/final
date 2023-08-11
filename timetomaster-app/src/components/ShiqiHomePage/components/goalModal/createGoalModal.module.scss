@@ -53,7 +53,6 @@
 .goal-title-div{
   margin-top: 0px;
 
-  
   h2{
     font-size: 20px;
     font-weight: 700;
@@ -83,8 +82,6 @@
     height: 35px;
     text-align: center;
   }
-
-
 }
 
 .goal-ddl-div {
@@ -98,7 +95,6 @@
     height: 35px;
     text-align: center;
   }
-
 }
 
 .select-logo {
@@ -129,7 +125,6 @@
   height: 100%;
   border-radius: 5px;
   transition: border 0.3s ease;
-
   object-fit: cover; // 保持图片比例
 }
 
@@ -171,7 +166,7 @@
   background-color: #e56352;
   color: white;
   order: -1;
-  margin-right: auto; /* Move Delete button to the beginning */
+  margin-right: auto; 
 }
 
 .cancel-button:hover{

@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import styles from './submitTime.module.scss';
+import styles from './createRecordModal.module.scss';
 
 const DurationSelector = ({ onTimeSelected }) => {
   const [selectedDuration, setSelectedDuration] = useState(null);
@@ -38,6 +38,6 @@ const DurationSelector = ({ onTimeSelected }) => {
 };
 
 export default DurationSelector;
-
+ 
 
 

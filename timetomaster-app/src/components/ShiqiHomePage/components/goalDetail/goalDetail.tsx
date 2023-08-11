@@ -10,6 +10,7 @@ interface Props {
   isOpen: boolean;
   goal: Goal | null;
   onClose: () => void;
+  addRecord :(goal: Goal) => void;
 }
 
 export default function GoalDetail(props: Props) {
@@ -31,12 +32,14 @@ export default function GoalDetail(props: Props) {
   const [totalHours, setTotalHours] = React.useState("");
   const [expectedCompletionDate, seteEpectedCompletionDate] = React.useState<string | null>(null);
 
+
+
+  const goalIcons = Array.from({ length: 12 }, (_, i) => require(`./goalicons/${i + 1}.png`));
+
   React.useEffect(() => {
     initializeModal();
   }, [props.goal]);
 
-  const goalIcons = Array.from({ length: 12 }, (_, i) => require(`./goalicons/${i + 1}.png`));
-  
   const initializeModal = () => {
     if (props.goal) {
       const date = new Date(props.goal.expectedCompletionDate);
@@ -47,15 +50,12 @@ export default function GoalDetail(props: Props) {
       const goalIcon = goalIcons[props.goal.logo - 1];
 
       setGoalIcon(goalIcon);
-    }else{
+    } else {
       const goalIcon = goalIcons[1];
-
       setGoalIcon(goalIcon);
     }
   };
-  
-  
-  
+
 
   return (
     <div className={styles['task-detail-page']}>
@@ -72,33 +72,33 @@ export default function GoalDetail(props: Props) {
               <div className={styles.subtitle}>Target Time: {totalHours} hours </div>
             </div>
 
-            <button className={styles.button}>
+            <button className={styles.button} onClick={() => props.addRecord(props.goal as Goal)}>
               <div className={styles.square}>
                 <div className={styles.plus}>+</div>
               </div>
-              <span className={styles.buttonText}>Add Invested Time</span>
+              <span className={styles.buttonText} >Add Invested Time</span>
             </button>
-            
+
           </div>
         </div>
 
         <div className={styles['time-day-record-div']}>
-            <div className = {styles.overallContent}>
-                <h3>5.5h</h3>
-                <p>Total Time</p>
-            </div>
-            <div className = {styles.overallContent}>
-                <h3>2d</h3>
-                <p>Steak</p>
-            </div>
-            <div className = {styles.overallContent}>
-                <h3>3</h3>
-                <p>Records</p>
-            </div>
+          <div className={styles.overallContent}>
+            <h3>5.5h</h3>
+            <p>Total Time</p>
+          </div>
+          <div className={styles.overallContent}>
+            <h3>2d</h3>
+            <p>Steak</p>
+          </div>
+          <div className={styles.overallContent}>
+            <h3>3</h3>
+            <p>Records</p>
+          </div>
         </div>
 
         <div className={styles['chart-div']}>
-          <HistogramSmall data={fakedata}/> 
+          <HistogramSmall data={fakedata} />
 
         </div>
 
