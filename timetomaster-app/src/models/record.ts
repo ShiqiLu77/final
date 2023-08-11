@@ -3,6 +3,6 @@ export default interface Record {
     userId: string;
     goalId:  string;
     goalName: string;
-    time: number;
+    Time: number;
     recordsDate: string;
 };

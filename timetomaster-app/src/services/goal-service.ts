@@ -1,4 +1,4 @@
-import  {getAll, create, search, update, remove} from './rest-service';
+import  {getAll, create, search, update, remove} from './goal-rest-service';
 
 import Goal  from '../models/goal';
 import PartialGoal from "../models/goal-update";
@@ -34,17 +34,17 @@ export const searchGoal = async <Goal> (buttonLabel: string): Promise<Goal[]> =>
       url = '/goals/search/progress';
       query.uid = uid;
       query.start = 0;
-      query.end = 50;
+      query.end = 0.5;
   } else if(buttonLabel === 'Nearly Done') {
       url = '/goals/search/progress';
       query.uid = uid;
-      query.start = 50;
-      query.end = 99;
+      query.start = 0.5;
+      query.end = 0.99;
   } else if(buttonLabel === 'Completed') {
     url = '/goals/search/progress';
     query.uid = uid;
-    query.start = 99;
-    query.end = 101;
+    query.start = 0.99;
+    query.end = 1.001;
 }
 
   const goals = await search<Goal>(url, query);

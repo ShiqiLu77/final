@@ -4,7 +4,7 @@ import PartialGoal from "../models/goal-update";
 const baseURI = 'http://localhost:9001';
 
 export const getAll = async (): Promise<Goal[]> => {
-    console.log('fetching all goals');
+    // console.log('fetching all goals');
     const url = '/goals';
     const response = await fetch( baseURI + url, {
         method: 'GET',
@@ -14,9 +14,9 @@ export const getAll = async (): Promise<Goal[]> => {
     });
 
     const goals: Goal[] = (await response.json()) as Goal[];
-    goals.forEach((goal) => {
-        console.log('Goal ID:', goal._id);
-    });
+    // goals.forEach((goal) => {
+    //     console.log('Goal ID:', goal._id);
+    // });
     return goals;
 }
 

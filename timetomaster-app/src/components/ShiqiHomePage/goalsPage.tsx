@@ -10,13 +10,12 @@ import EditGoalModal from './components/goalModal/editGoalModal';
 
 import Goal from '@/models/goal';
 
-
 export default function GoalsPage() {
   const [goals, setGoals] = useState<Goal[]>([]);
 
   const [createModalOpen, setCreateModalOpen] = useState(false);
   const [editModalOpen, setEditModalOpen] = useState(false);
-  const [currentGoal, setCurrentGoal] = useState<Goal>(); // 用于存储选中的目标
+  const [currentGoal, setCurrentGoal] = useState<Goal>(); 
 
   const [selectedTab, setSelectedTab] = useState('Goals');
 
