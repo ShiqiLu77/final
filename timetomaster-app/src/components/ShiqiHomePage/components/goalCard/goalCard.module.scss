@@ -9,7 +9,9 @@
     border: 1px dashed  #cbcbc3;
     padding: 15px 30px;
     max-width: 560px; /* Set maximum width */
+    min-width: 560px;
     min-height: 200px;
+    max-height: 200px;
   }
   
   @media (max-width: 1200px) {
@@ -28,19 +30,39 @@
     border-radius: 50%;
     background-color: #f6f7f2;
     margin-right:  10px;
+    margin-left: 10px;
     min-width: 110px;
   }
 
 
 .goalDetails{
   margin: 20px 15px;
+  max-width: 250px;
+  min-width: 250px;
   .goalName {
     font-family: "Roboto", sans-serif;
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 700;
     color: #000000;
     margin-bottom: 10px;
+    min-width: 100%;
   }
+}
+
+
+.goalInfo {
+  display: flex;
+  flex-direction: column; // Adjust this spacing as needed
+}
+
+.goalInfoItem {
+  display: flex;
+  align-items: flex-start; 
+}
+
+.goalLabel {
+  margin-right: 10px; // Adjust this spacing as needed
+  flex-shrink: 0; 
 }
 
 

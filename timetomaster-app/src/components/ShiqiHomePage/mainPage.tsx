@@ -1,12 +1,13 @@
-import styles from './goalsPage.module.scss';
+import styles from './mainPage.module.scss';
 import React, { useState, useEffect } from 'react';
-import { getAllGoal } from './../../services/goal-service';
+import { getAllGoal, updateGoal, deleteGoal } from './../../services/goal-service';
 
 import Header from './components/header/header';
 import TypeSelector from './components/typeSelector/typeSelector';
-import GoalCard from './components/goalCard/goalCard';
+import GoalCardMain from './components/goalCard/goalCard2';
 import CreateGoalModal from './components/goalModal/createGoalModal';
 import EditGoalModal from './components/goalModal/editGoalModal';
+import Calendar from './components/calendar/calendar';
 
 import Goal from '@/models/goal';
 
@@ -16,9 +17,9 @@ export default function GoalsPage() {
 
   const [createModalOpen, setCreateModalOpen] = useState(false);
   const [editModalOpen, setEditModalOpen] = useState(false);
-  const [currentGoal, setCurrentGoal] = useState<Goal>(); // 用于存储选中的目标
+  const [currentGoal, setCurrentGoal] = useState<Goal>();
 
-  const [selectedTab, setSelectedTab] = useState('Goals');
+  const [selectedTab, setSelectedTab] = useState('Today');
 
   // Display modal to edit goal
   const handleEdit = (goal: Goal) => {
@@ -47,11 +48,11 @@ export default function GoalsPage() {
 
   // Fetch All goals
   const goalCards = goals.map((goal) =>
-    <GoalCard
+    <GoalCardMain
       key={goal._id}
       goal={goal}
       onEdit={() => handleEdit(goal)}
-    ></GoalCard>);
+    ></GoalCardMain>);
 
   const fetchAllGoals = () => {
     getAllGoal().then((items) => {
@@ -66,7 +67,6 @@ export default function GoalsPage() {
 
   // search goal based on type progess/completed
   const [activeButton, setActiveButton] = useState('All');
-
   const handleButtonClick = (buttonLabel: string) => {
     setActiveButton(buttonLabel);
     // 这里你可以将选中的按钮信息发送给父组件或者进行其他操作
@@ -86,7 +86,14 @@ export default function GoalsPage() {
           </div>
         </div>
 
-        <div className={styles.goalList}>{goalCards}</div>
+        <div className={styles.contentWrapper}> 
+          <div className={styles.goalListContainer}> 
+            <div className={styles.goalList}>{goalCards}</div>
+          </div>
+          <div className={styles.calendarContainer}>
+            <Calendar /> 
+          </div>
+        </div>
       </main>
 
       <footer className="footer">
