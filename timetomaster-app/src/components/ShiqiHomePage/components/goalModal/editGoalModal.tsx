@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styles from './editGoalModal.module.scss';
 import DatePicker from 'react-datepicker';
 import Goal from '@/models/goal';
-import PartialGoal from '@/models/partial-goal';
+import PartialGoal from '@/models/goal-update';
 
 import goalIcon1 from './goalIcons/1.png';
 import goalIcon2 from './goalIcons/2.png';
