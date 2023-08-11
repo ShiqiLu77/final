@@ -69,10 +69,10 @@
   }
 
   .current-date {
-    background-color: #e7e7e5;
-    border-radius: 5px;
-    color: rgb(32, 32, 32);
-    padding: 3px 20px;
+    // background-color: #e7e7e5;
+    // border-radius: 5px;
+    // color: rgb(32, 32, 32);
+    // padding: 3px 20px;
     font-size: 16px;
   }
 }
@@ -221,4 +221,18 @@
       background-color: #ff6666;
     }
   }
+}
+
+.react-datepicker__input-container input {
+  border: none;
+  background-color: #e7e7e5; 
+  outline: none; 
+}
+
+.react-datepicker-wrapper {
+  width: 100%; 
+}
+
+.react-datepicker {
+  font-size: 1rem;
 }

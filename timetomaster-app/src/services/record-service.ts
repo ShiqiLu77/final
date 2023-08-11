@@ -11,7 +11,7 @@ export const createRecord = async (record: RecordCreate) => {
 
 export const getDailyByUid = async (): Promise<DailyRecord[]> => {
   let url = '/records/userSearch/dailyTime';
-  let uid = 'user123'
+  let uid = '123456'
   const query: any = {};
   query.uid = uid;
 
@@ -21,7 +21,7 @@ export const getDailyByUid = async (): Promise<DailyRecord[]> => {
 
 export const getWeeklyByUid = async (): Promise<DailyRecord[]> => {
   let url = '/records/userSearch/weeklyTime';
-  let uid = 'user123'
+  let uid = '123456'
   const query: any = {};
   query.uid = uid;
 
@@ -31,7 +31,7 @@ export const getWeeklyByUid = async (): Promise<DailyRecord[]> => {
 
 export const getMonthlyByUid = async (): Promise<DailyRecord[]> => {
   let url = '/records/userSearch/monthlyTime';
-  let uid = 'user123'
+  let uid = '123456'
   const query: any = {};
   query.uid = uid;
 

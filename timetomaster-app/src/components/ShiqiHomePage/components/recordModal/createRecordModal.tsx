@@ -5,6 +5,8 @@ import GoalCard from '../goalCard/goalCard3';
 import Goal from '@/models/goal';
 import Record from '@/models/record';
 import RecordCreate from '@/models/record-create';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 
 import { createRecord } from '../../../../services/record-service';
 
@@ -18,10 +20,10 @@ interface Props {
 export default function CreateRecordModal(props: Props) {
   const [selectedTime, setSelectedTime] = useState(0);
   const [goalId, setGoalId] = React.useState("");
+  const [selectedDate, setSelectedDate] = useState(new Date());
 
   const [submitError, setSubmitError] = React.useState<string | null>(null);
   const [formError, setFormError] = React.useState<string | null>(null);
-
 
   const handleTimeSelected = (timeInMinutes: number) => {
     setSelectedTime((prevTime) => prevTime + timeInMinutes);
@@ -31,14 +33,16 @@ export default function CreateRecordModal(props: Props) {
     setSelectedTime(0);
   };
 
+  const handleDateChange = (date: Date) => {
+    setSelectedDate(date);
+  };
+
   const handleClose = async () => {
     props.onClose();
     setSelectedTime(0);
     setFormError(null);
     setSubmitError(null);
   }
-
-
 
   const handleSubmit = async () => {
     if (selectedTime && props.goal) {
@@ -47,7 +51,7 @@ export default function CreateRecordModal(props: Props) {
         goalId: props.goal._id,
         goalName: props.goal.title,
         Time: selectedTime/60,
-        recordsDate: new Date().toLocaleDateString(),
+        recordsDate: selectedDate.toLocaleDateString(),
       };
       console.log("newRecord:", newRecord);
       try {
@@ -72,10 +76,6 @@ export default function CreateRecordModal(props: Props) {
     }
   }, [selectedTime]);
 
-  // const handleReset = () => {
-  //   if (onReset) onReset(); // Ensure onReset is provided
-  // };
-
   const formatTime = (timeInMinutes: number) => {
     const hours = Math.floor(timeInMinutes / 60);
     const minutes = timeInMinutes % 60;
@@ -94,7 +94,6 @@ export default function CreateRecordModal(props: Props) {
           <div className={styles['top-div']}>
             <GoalCard key={goalId}
               goal={props.goal} />
-            {/* <TimeAccumulator selectedTime={selectedTime} onReset={handleReset} /> */}
             <div className={`${styles['time-accumulator']} ${isVisible ? styles.visible : ''}`}>
               <div className={styles['time-display']}>
                 {formatTime(selectedTime)}
@@ -108,7 +107,7 @@ export default function CreateRecordModal(props: Props) {
           <div className={styles['date-display']}>
             <p>Records</p>
             <div className={styles['current-date']}>
-              {new Date().toLocaleDateString()}
+            <DatePicker selected={selectedDate} onChange={handleDateChange} />
             </div>
           </div>
 

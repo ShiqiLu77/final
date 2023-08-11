@@ -59,6 +59,8 @@ export default function MainPage() {
   const handleCreateRecord = (newRecord: Record) => {
     setRecords([...records, newRecord]);
     setCreateRecordModalOpen(false);
+    fetchAllGoals();
+    fetchAllRecordsByGid();
   };
 
   // Fetch All records
