@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styles from './goalDetail.module.scss';
 import Goal from '@/models/goal';
+import Image from 'next/image';
 
 import goalIcon from './goalicon.png'
 import HistogramSmall from './../histoGram/histogramSmall';
@@ -10,6 +11,7 @@ interface Props {
   goal: Goal | null;
   onClose: () => void;
 }
+
 export default function GoalDetail(props: Props) {
   const fakedata = [
     { day: 'Mon', hours: 4 },
@@ -25,6 +27,7 @@ export default function GoalDetail(props: Props) {
   ];
 
   const [title, setTitle] = React.useState("");
+  const [goalIcon, setGoalIcon] = React.useState("");
   const [totalHours, setTotalHours] = React.useState("");
   const [expectedCompletionDate, seteEpectedCompletionDate] = React.useState<string | null>(null);
 
@@ -32,6 +35,8 @@ export default function GoalDetail(props: Props) {
     initializeModal();
   }, [props.goal]);
 
+  const goalIcons = Array.from({ length: 12 }, (_, i) => require(`./goalicons/${i + 1}.png`));
+  
   const initializeModal = () => {
     if (props.goal) {
       const date = new Date(props.goal.expectedCompletionDate);
@@ -39,8 +44,18 @@ export default function GoalDetail(props: Props) {
       seteEpectedCompletionDate(localDateTime.toISOString().slice(0, 16));
       setTitle(props.goal.title);
       setTotalHours(props.goal.totalHours.toString());
+      const goalIcon = goalIcons[props.goal.logo - 1];
+
+      setGoalIcon(goalIcon);
+    }else{
+      const goalIcon = goalIcons[1];
+
+      setGoalIcon(goalIcon);
     }
   };
+  
+  
+  
 
   return (
     <div className={styles['task-detail-page']}>
@@ -48,7 +63,7 @@ export default function GoalDetail(props: Props) {
         <div className={styles['top-div']}>
 
           <div className={styles.left}>
-            <img src={goalIcon.src} alt="Left Image" className={styles.image} />
+            <Image src={goalIcon} alt="" width={200} height={180} />
           </div>
 
           <div className={styles.right}>
