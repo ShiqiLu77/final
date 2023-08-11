@@ -3,13 +3,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 15px;
+  padding: 0px 15px;
 }
 
 .calendar {
   width: 100%;
   max-width: 330px;
-  border: 1px solid #e0e0e0;
+  border: 1px dashed  #cbcbc3;
   border-radius: 8px;
   background-color: #ffffff;
   overflow: hidden;
