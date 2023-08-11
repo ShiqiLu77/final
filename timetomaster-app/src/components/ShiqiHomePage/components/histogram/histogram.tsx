@@ -20,15 +20,30 @@ export default function Histogram( props: HistogramProps) {
     };
 
     const getDataForPeriod = () => {
+        let records :DailyRecord[];
         switch (selectedPeriod) {
             case 'day':
-                return props.dailyRecords;
+                records = props.dailyRecords;
+                break;
             case 'week':
-                return props.weeklyRecords;
+                records = props.weeklyRecords;
+                break;
             case 'month':
-                return props.monthlyRecords;
+                records = props.monthlyRecords;
+                break;
+            default:
+                records = [];
+                break;
         }
+    
+        return records.sort((a, b) => {
+            const dateA = new Date(a.recordsDate).getTime();
+            const dateB = new Date(b.recordsDate).getTime();
+            return dateB - dateA;
+        });
     };
+    
+    
 
     return (
         <div className={styles.chartContainer}>
@@ -58,26 +73,35 @@ export default function Histogram( props: HistogramProps) {
                         className={styles.customChart}
                         width={800}
                         height={400}
-                        data={getDataForPeriod()} 
-                        margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                        data={getDataForPeriod()}
+                        margin={{ top: 15, right: 10, left: 10, bottom: 5 }}
                     >
                         <CartesianGrid strokeDasharray="3 3" stroke="#eee" />
                         <XAxis dataKey="recordsDate" stroke="#494949" axisLine={false} tickLine={false}
-                            // tickFormatter={(value) => {
-                            //     const date = new Date(value);
-                            //     const month = date.getMonth() + 1;
-                            //     const day = date.getDate();
-                            //     return `${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`; // 根据value的日期格式化
-                            // }}
+                            tick={{ fontSize: 16 }}
+                            tickFormatter={(value) => {
+                                const date = new Date(value);
+                                const month = date.getMonth() + 1;
+                                const day = date.getDate();
+                                return day ? `${month.toString()}-${day.toString()}` : `${month.toString()}`;
+                            }}
                         >
                             <ReferenceLine y={0} stroke="#494949" />
                         </XAxis>
-                        <YAxis stroke="#494949" axisLine={false} tickLine={false} />
-                        <Tooltip contentStyle={{ backgroundColor: '#333', color: '#f3f3f2' }} />
-                        <Bar dataKey="totalHours" fill="#d1cd8e" barSize={30} >
-                            <LabelList dataKey="totalHours" position="top" />
+                        <YAxis stroke="#494949" axisLine={false} tickLine={false} tick={{ fontSize: 12 }} />
+                        <Tooltip contentStyle={{ backgroundColor: '#333', color: '#f3f3f2' }}
+                            formatter={(value: number) => {
+                                return parseFloat(value.toFixed(2));
+                            }}
+                        />
+                        <Bar dataKey="totalHours" fill="#d1cd8e" barSize={30}>
+                            <LabelList dataKey="totalHours" position="top"
+                                formatter={(value: number) => parseFloat(value.toFixed(2))}
+                                fontSize={16}
+                            />
                         </Bar>
-                        <Line type="linear" dataKey="totalHours" stroke="#a7b798" strokeWidth={2} dot={true} />
+                        <Line type="linear" dataKey="totalHours" stroke="#a7b798"
+                            strokeWidth={2} dot={true} />
                     </ComposedChart>
                 </div>
             </div>

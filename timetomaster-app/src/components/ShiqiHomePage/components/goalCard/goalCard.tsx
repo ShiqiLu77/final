@@ -1,10 +1,8 @@
 import styles from './goalCard.module.scss';
 
 import React, { useState } from 'react';
-import { Link } from "react-router-dom";
 import Image from 'next/image';
 
-// import goalIcon from './goalicon.png';
 import GoalDetailModal from '../goalModal/editGoalModal';
 
 import Goal from '@/models/goal';
@@ -15,19 +13,6 @@ interface Props {
 }
 
 export default function goalCard(props: Props) {
-
-    // const [isModalOpen, setIsModalOpen] = useState(false); // 添加状态
-
-
-    // const handleEdit = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    //     props.onGoalClick(props.goal);
-    //     setIsModalOpen(true);
-    //     event.stopPropagation();
-    // };
-
-    // const closeModal = () => {
-    //     setIsModalOpen(false); 
-    // };
     const goalIcons = Array.from({ length: 12 }, (_, i) => require(`./goalicons/${i + 1}.png`));
     const goalIcon = goalIcons[props.goal.logo - 1];
 
@@ -52,7 +37,7 @@ export default function goalCard(props: Props) {
                 <div className={styles.goalName}>{props.goal.title}</div>
                 <div className={styles.goalInfo}>
                     <div className={styles.goalInfoItem}>
-                        <span className={styles.goalLabel}>Total Hours :</span> {props.goal.totalHours}
+                        <span className={styles.goalLabel}>Total Hours :</span> {props.goal.totalHours.toFixed(2)}
                     </div>
                     <div className={styles.goalInfoItem}>
                         <span className={styles.goalLabel}>Progress :</span> {formattedProgress}

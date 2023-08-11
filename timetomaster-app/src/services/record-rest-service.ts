@@ -1,7 +1,27 @@
 import Record  from '../models/record';
 import DailyRecord from '@/models/record-daily';
+import RecordCreate from '@/models/record-create';
 
 const baseURI = 'http://localhost:9001';
+
+export const create = async (record: RecordCreate) => {
+    const url = '/records';
+    const response = await fetch(baseURI + url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(record),
+    });
+  
+    if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const newRecord: Record = (await response.json()) as Record;
+    return newRecord;
+}
+
+
 
 export const getAll = async (): Promise<Record[]> => {
     console.log('fetching all records');
@@ -14,9 +34,6 @@ export const getAll = async (): Promise<Record[]> => {
     });
 
     const records: Record[] = (await response.json()) as Record[];
-    records.forEach((record) => {
-        console.log('Record ID:', record._id);
-    });
     return records;
 }
 
@@ -57,22 +74,6 @@ export const searchByGid = async <DailyRecord> (url: string, query: any = {} ): 
 }
 
 
-// export const create = async (partialRecord: PartialRecord) => {
-//     const url = '/records';
-//     const response = await fetch(baseURI + url, {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json',
-//         },
-//         body: JSON.stringify(partialRecord),
-//     });
-  
-//     if (!response.ok) {
-//         throw new Error(`HTTP error! status: ${response.status}`);
-//     }
-//     const newRecord: Record = (await response.json()) as Record;
-//     return newRecord;
-// }
 
 export const remove = async (id: string) => {
     const url = '/records/';

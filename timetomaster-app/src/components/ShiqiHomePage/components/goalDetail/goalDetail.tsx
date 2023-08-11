@@ -1,40 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import styles from './goalDetail.module.scss';
 import Goal from '@/models/goal';
+import Record from '@/models/record';
 import Image from 'next/image';
 
-import goalIcon from './goalicon.png'
 import HistogramSmall from '../histogram/histogramSmall';
+import DailyRecord from '@/models/record-daily';
 
 interface Props {
   isOpen: boolean;
   goal: Goal | null;
   onClose: () => void;
   addRecord :(goal: Goal) => void;
+  dailyRecords: DailyRecord[];
+  weeklyRecords: DailyRecord[];
+  monthlyRecords: DailyRecord[];
 }
 
 export default function GoalDetail(props: Props) {
-  const fakedata = [
-    { day: 'Mon', hours: 4 },
-    { day: 'Tue', hours: 5 },
-    { day: 'Wed', hours: 3 },
-    { day: 'Thu', hours: 6 },
-    { day: 'Fri', hours: 2 },
-    { day: 'Sat', hours: 4 },
-    { day: 'Sun', hours: 3 },
-    { day: 'Sun', hours: 3 },
-    { day: 'Sun', hours: 3 },
-    { day: 'Sun', hours: 3 },
-  ];
 
   const [title, setTitle] = React.useState("");
   const [goalIcon, setGoalIcon] = React.useState("");
   const [totalHours, setTotalHours] = React.useState("");
   const [expectedCompletionDate, seteEpectedCompletionDate] = React.useState<string | null>(null);
-
+  const [daylyRecords, setDaylyRecords] = useState<DailyRecord[]>([]);
+  const [weeklyRecords, setWeeklyRecords] = useState<DailyRecord[]>([]);
+  const [monthlyRecords, setMonthlyRecords] = useState<DailyRecord[]>([]);
 
 
   const goalIcons = Array.from({ length: 12 }, (_, i) => require(`./goalicons/${i + 1}.png`));
+
+
 
   React.useEffect(() => {
     initializeModal();
@@ -48,11 +44,17 @@ export default function GoalDetail(props: Props) {
       setTitle(props.goal.title);
       setTotalHours(props.goal.totalHours.toString());
       const goalIcon = goalIcons[props.goal.logo - 1];
-
       setGoalIcon(goalIcon);
+      setDaylyRecords(props.dailyRecords);
+      setWeeklyRecords(props.weeklyRecords);
+      setMonthlyRecords(props.monthlyRecords);
+
     } else {
       const goalIcon = goalIcons[1];
       setGoalIcon(goalIcon);
+            setDaylyRecords(props.dailyRecords);
+      setWeeklyRecords(props.weeklyRecords);
+      setMonthlyRecords(props.monthlyRecords);
     }
   };
 
@@ -98,8 +100,9 @@ export default function GoalDetail(props: Props) {
         </div>
 
         <div className={styles['chart-div']}>
-          <HistogramSmall data={fakedata} />
-
+          <HistogramSmall dailyRecords = {daylyRecords}
+            weeklyRecords = {weeklyRecords}
+            monthlyRecords= {monthlyRecords} />
         </div>
 
       </div>

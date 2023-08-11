@@ -1,24 +1,30 @@
 import styles from './mainPage.module.scss';
 import React, { useState, useEffect } from 'react';
 import { getAllGoal, updateGoal } from './../../services/goal-service';
+import { getDailyByGid, getWeeklyByGid, getMonthlyByGid } from './../../services/record-service';
 
 import Header from './components/header/header';
 import GoalCardMain from './components/goalCard/goalCard2';
 import Calendar from './components/calendar/calendar';
-import CreateGoalModal from './components/goalModal/createGoalModal';
 import GoalDetail from './components/goalDetail/goalDetail';
-import CreateRecordGoalModal from './components/submit_time_page_files/createRecordModal';
+import CreateRecordGoalModal from './components/recordModal/createRecordModal';
 
 import Goal from '@/models/goal';
 import Record from '@/models/record';
+import DailyRecord from '@/models/record-daily';
 
 export default function MainPage() {
   const [goals, setGoals] = useState<Goal[]>([]);
+  const [records, setRecords] = useState<Record[]>([]);
 
-  const [createModalOpen, setCreateModalOpen] = useState(false);
   const [createRecordModalOpen, setCreateRecordModalOpen] = useState(false);
   const [goalDetailOpen, setGoalDetailOpen] = useState(true);
   const [currentGoal, setCurrentGoal] = useState<Goal>();
+
+  const [daylyRecords, setDaylyRecords] = useState<DailyRecord[]>([]);
+  const [weeklyRecords, setWeeklyRecords] = useState<DailyRecord[]>([]);
+  const [monthlyRecords, setMonthlyRecords] = useState<DailyRecord[]>([]);
+
 
   const [selectedTab, setSelectedTab] = useState('Today');
 
@@ -35,14 +41,9 @@ export default function MainPage() {
   };
 
 
-  // Create new goal
-  const handleCreateGoal = (newGoal: Goal) => {
-    setGoals([...goals, newGoal]);
-    setCreateModalOpen(false);
-  };
-
   // Create new record
   const handleCreateRecord = (newRecord: Record) => {
+    setRecords([...records, newRecord]);
     setCreateRecordModalOpen(false);
   };
 
@@ -60,8 +61,22 @@ export default function MainPage() {
     });
   };
 
+  const fetchAllRecordsByGid = () => {
+    getDailyByGid().then((items) => {
+      setDaylyRecords(items);
+    });
+    getWeeklyByGid().then((items) => {
+      setWeeklyRecords(items);
+    });
+    getMonthlyByGid().then((items) => {
+      setMonthlyRecords(items);
+    });
+  };
+
+
   useEffect(() => {
     fetchAllGoals();
+    fetchAllRecordsByGid();
   }, [currentGoal, goalDetailOpen]);
 
 
@@ -71,12 +86,6 @@ export default function MainPage() {
 
       <main className={styles.mainContent}>
         <div className={styles.selectorContainer}>
-          <div className={styles.addButton}>
-            <div className={styles.innerCircle}>
-              <span className={styles.plusSign}
-                onClick={() => setCreateModalOpen(true)}>+</span>
-            </div>
-          </div>
         </div>
 
         <div className={styles.contentWrapper}>
@@ -90,6 +99,9 @@ export default function MainPage() {
               goal={currentGoal || null}
               onClose={() => setGoalDetailOpen(false)}
               addRecord = {handleEditRecord}
+              dailyRecords = {daylyRecords}
+            weeklyRecords = {weeklyRecords}
+            monthlyRecords= {monthlyRecords}
             />
           </div>
           <div className={styles.calendarContainer}>
@@ -101,12 +113,6 @@ export default function MainPage() {
       <footer className="footer">
         <div className={styles.footContent}>copyright@ 2023 northeastern university</div>
       </footer>
-
-      <CreateGoalModal
-        isOpen={createModalOpen}
-        onClose={() => setCreateModalOpen(false)}
-        onCreate={handleCreateGoal}
-      />
 
       <CreateRecordGoalModal goal={currentGoal || null}
         isOpen={createRecordModalOpen}

@@ -9,13 +9,14 @@ import CreateGoalModal from './components/goalModal/createGoalModal';
 import EditGoalModal from './components/goalModal/editGoalModal';
 
 import Goal from '@/models/goal';
+import Record from '@/models/record';
 
 export default function GoalsPage() {
   const [goals, setGoals] = useState<Goal[]>([]);
 
   const [createModalOpen, setCreateModalOpen] = useState(false);
   const [editModalOpen, setEditModalOpen] = useState(false);
-  const [currentGoal, setCurrentGoal] = useState<Goal>(); 
+  const [currentGoal, setCurrentGoal] = useState<Goal>();
 
   const [selectedTab, setSelectedTab] = useState('Goals');
 
