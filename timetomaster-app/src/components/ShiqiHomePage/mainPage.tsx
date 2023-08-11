@@ -3,11 +3,10 @@ import React, { useState, useEffect } from 'react';
 import { getAllGoal, updateGoal, deleteGoal } from './../../services/goal-service';
 
 import Header from './components/header/header';
-import TypeSelector from './components/typeSelector/typeSelector';
 import GoalCardMain from './components/goalCard/goalCard2';
-import CreateGoalModal from './components/goalModal/createGoalModal';
-import EditGoalModal from './components/goalModal/editGoalModal';
 import Calendar from './components/calendar/calendar';
+import CreateGoalModal from './components/goalModal/createGoalModal';
+import GoalDetail from './components/goalDetail/goalDetail';
 
 import Goal from '@/models/goal';
 
@@ -16,15 +15,17 @@ export default function GoalsPage() {
   const [goals, setGoals] = useState<Goal[]>([]);
 
   const [createModalOpen, setCreateModalOpen] = useState(false);
-  const [editModalOpen, setEditModalOpen] = useState(false);
+  const [goalDetailOpen, setGoalDetailOpen] = useState(true);
+  const [isGoalDetailVisible, setIsGoalDetailVisible] = useState(true);
   const [currentGoal, setCurrentGoal] = useState<Goal>();
 
   const [selectedTab, setSelectedTab] = useState('Today');
 
   // Display modal to edit goal
   const handleEdit = (goal: Goal) => {
+    console.log("handleEdit called with goal:", goal);
     setCurrentGoal(goal);
-    setEditModalOpen(true);
+    setGoalDetailOpen(true);
   };
 
   // Create new goal
@@ -33,18 +34,6 @@ export default function GoalsPage() {
     setCreateModalOpen(false);
   };
 
-  // Update a goal
-  const handleSave = async () => {
-    fetchAllGoals();
-    setEditModalOpen(false);
-  };
-
-  // Delete a goal
-  const handleDelete = React.useCallback(async () => {
-    if (!currentGoal) { return; }
-    setGoals(goals.filter((goal) => goal._id !== currentGoal._id));
-    setEditModalOpen(false);
-  }, [currentGoal, goals]);
 
   // Fetch All goals
   const goalCards = goals.map((goal) =>
@@ -62,15 +51,8 @@ export default function GoalsPage() {
 
   useEffect(() => {
     fetchAllGoals();
-    console.log("editModalOpen changed:", editModalOpen);
-  }, [editModalOpen]);
+  }, [currentGoal, goalDetailOpen, isGoalDetailVisible]);
 
-  // search goal based on type progess/completed
-  const [activeButton, setActiveButton] = useState('All');
-  const handleButtonClick = (buttonLabel: string) => {
-    setActiveButton(buttonLabel);
-    // 这里你可以将选中的按钮信息发送给父组件或者进行其他操作
-  };
 
   return (
     <div className={styles.pageContainer}>
@@ -78,7 +60,6 @@ export default function GoalsPage() {
 
       <main className={styles.mainContent}>
         <div className={styles.selectorContainer}>
-          <TypeSelector activeButton={activeButton} onButtonClick={handleButtonClick} />
           <div className={styles.addButton}>
             <div className={styles.innerCircle}>
               <span className={styles.plusSign} onClick={() => setCreateModalOpen(true)}>+</span>
@@ -86,12 +67,19 @@ export default function GoalsPage() {
           </div>
         </div>
 
-        <div className={styles.contentWrapper}> 
-          <div className={styles.goalListContainer}> 
-            <div className={styles.goalList}>{goalCards}</div>
+        <div className={styles.contentWrapper}>
+          <div className={styles.goalListContainer}>
+            <div className={styles.goalList}>
+              {goalCards}
+            </div>
+          </div>
+          <div className={styles.goalDetail}>
+            <GoalDetail isOpen={goalDetailOpen}
+              goal={currentGoal || null}
+              onClose={() => setGoalDetailOpen(false)} />
           </div>
           <div className={styles.calendarContainer}>
-            <Calendar /> 
+            <Calendar />
           </div>
         </div>
       </main>
@@ -104,14 +92,6 @@ export default function GoalsPage() {
         isOpen={createModalOpen}
         onClose={() => setCreateModalOpen(false)}
         onCreate={handleCreate}
-      />
-
-      <EditGoalModal
-        isOpen={editModalOpen}
-        goal={currentGoal || null}
-        onClose={() => setEditModalOpen(false)}
-        onSave={handleSave}
-        onDelete={handleDelete}
       />
     </div>
 

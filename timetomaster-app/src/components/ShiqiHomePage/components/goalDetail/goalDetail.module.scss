@@ -1,53 +1,51 @@
 /* The Modal (background) */
 .task-detail-page {
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.4);
 }
 
 /* Modal Content/Box */
 .container {
   position: relative;
   background-color: #fefefe;
-  margin: 15% auto;
-  padding: 40px;
-  border: 1px solid #888;
-  width: 38%;
+  padding: 10px 30px;
+  width: 100%;
+  min-height: 680px;
   border-radius: 10px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   
   .top-div {
     width: 100%;
-    height: 25%; // 25% of the viewport height
+    min-height: 200px;
+    height: 20%;
     display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: #ffffff;
     margin: 0 auto; // Center horizontally on the page
   
     .left {
-      width: 30%;
+      width: 40%;
       display: flex;
       justify-content: center;
       align-items: center;
     }
   
     .right {
-      width: 70%;
+      margin: 22px;
+      width: 60%;
       display: flex;
       flex-direction: column;
       justify-content: center; // Move content to vertical center
-      align-items: center; // Center content horizontally
+      align-items:flex-start; // Center content horizontally
   
       .textContainer {
-        text-align: center; // Center text horizontally
+        text-align:left; // Center text horizontally
         margin-bottom: 10px; // Reduce gap between text and button
   
         .title {
-          font-size: 24px;
+          font-size: 16px;
+          font-weight: bolder;
           color: #000000;
         }
   
@@ -58,6 +56,7 @@
       }
   
       .button {
+        margin-top: 10px;
         background-color: #f2f5f0;
         border: none;
         display: flex;
@@ -66,7 +65,7 @@
         padding: 10px 20px;
         border-radius: 5px;
         cursor: pointer;
-        width: 300px;
+        width: 200px;
   
         .square {
           background-color: #b4c2a8;
@@ -86,7 +85,8 @@
   
         .buttonText {
           color: #333;
-          font-size: 16px;
+          font-size: 14px;
+          font-weight: 600;
           text-align: center; // Center text inside button
         }
       }
@@ -110,9 +110,31 @@
 
 
 .time-day-record-div {
+  padding: 15px 10px;
   width: 100%;
-  height: 10%;
-  background-color: #f6f7f2;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px dashed #8a8a89; 
+  border-bottom: 1px dashed #8a8a89; 
+
+  .overallContent{
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    margin: 0px 30px;
+
+    h3{
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    p{
+      font-size: 14px;
+      color:#a6a6a5;
+    }
+  }
 }
 
 .chart-div {
@@ -121,6 +143,8 @@
   background-color: #f6f7f2;
   border-radius: 20px; // Setting rounded corners
   margin-top: 5%; // 5% space between TimeDayRecordDiv and ChartDiv
+
+
 }
 
 .edit-task-button {
