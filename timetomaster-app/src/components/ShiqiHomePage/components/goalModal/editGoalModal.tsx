@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styles from './editGoalModal.module.scss';
 import DatePicker from 'react-datepicker';
 import Goal from '@/models/goal';
-import PartialGoal  from '@/models/partial-goal';
+import PartialGoal from '@/models/partial-goal';
 
 import goalIcon1 from './goalIcons/1.png';
 import goalIcon2 from './goalIcons/2.png';
@@ -18,6 +18,8 @@ import goalIcon11 from './goalIcons/11.png';
 import goalIcon12 from './goalIcons/12.png';
 
 import { updateGoal, deleteGoal } from '../../../../services/goal-service';
+import Image from 'next/image';
+
 
 interface Props {
   isOpen: boolean;
@@ -31,6 +33,8 @@ const images = [goalIcon1, goalIcon2, goalIcon3, goalIcon4, goalIcon5, goalIcon6
   , goalIcon7, goalIcon8, goalIcon9, goalIcon10, goalIcon11, goalIcon12]
 
 export default function EditGoalModal(props: Props) {
+  const [selectedImageIndex, setSelectedImageIndex] = React.useState<number | null>(null);
+
 
   const [selectedImage, setSelectedImage] = React.useState<string | null>(null);
   const [title, setTitle] = React.useState("");
@@ -54,19 +58,20 @@ export default function EditGoalModal(props: Props) {
   };
 
   const handleSave = async () => {
-    if(title && expectedCompletionDate && props.goal) {
-      const updatedGoal :PartialGoal = {
-        title : title,
-        totalHours : totalHours,
+    if (title && expectedCompletionDate && props.goal) {
+      const updatedGoal: PartialGoal = {
+        title: title,
+        totalHours: totalHours,
         expectedCompletionDate: expectedCompletionDate,
+        logo: selectedImageIndex || props.goal.logo
       };
-      try{
+      try {
         await updateGoal(props.goal._id, updatedGoal);
         props.onSave();
       } catch (error) {
         setSubmitError('Updating goal failed. Please try again.');
-      } 
-    }else {
+      }
+    } else {
       setFormError('Please fill in all required fields: Title and Total Hours and  Expected Completion Date  .');
     }
   }
@@ -118,7 +123,7 @@ export default function EditGoalModal(props: Props) {
 
         <div className={styles['select-logo']}>Please select a logo</div>
         <div className={styles['image-selection']}>
-          {images.map((image, index) => (
+          {/* {images.map((image, index) => (
             <div className={styles['image-container']} key={index} onClick={() => setSelectedImage(image.src)}>
               <img
                 src={image.src}
@@ -126,11 +131,24 @@ export default function EditGoalModal(props: Props) {
                 className={selectedImage === image.src ? `${styles.image} ${styles.selected}` : styles.image}
               />
             </div>
+          ))} */}
+          {images.map((image, index) => (
+            <div className={styles['image-container']} key={index} onClick={() => setSelectedImageIndex(index + 1)}>
+              <Image
+                src={image}
+                alt={`Image ${index}`}
+                width={200} // 设置适当的宽度
+                height={180} // 设置适当的高度
+                className={selectedImageIndex === (index + 1) ? `${styles.image} ${styles.selected}` : styles.image}
+              />
+            </div>
           ))}
+
+
         </div>
 
         <div className={styles['button-bar']}>
-          <button className={styles['delete-button']}  onClick={handleDelete}>Delete</button>
+          <button className={styles['delete-button']} onClick={handleDelete}>Delete</button>
           <div className={styles['spacer']}></div>
           <button className={styles['cancel-button']} onClick={handleClose}>Cancel</button>
           <button className={styles['submit-button']} onClick={handleSave}>Done</button>
