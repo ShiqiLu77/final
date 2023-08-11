@@ -1,6 +1,6 @@
 import styles from './goalsPage.module.scss';
 import React, { useState, useEffect } from 'react';
-import { getAllGoal } from './../../services/goal-service';
+import { getAllGoal, searchGoal } from './../../services/goal-service';
 
 import Header from './components/header/header';
 import TypeSelector from './components/typeSelector/typeSelector';
@@ -61,15 +61,15 @@ export default function GoalsPage() {
 
   useEffect(() => {
     fetchAllGoals();
-    console.log("editModalOpen changed:", editModalOpen);
   }, [editModalOpen]);
 
   // search goal based on type progess/completed
   const [activeButton, setActiveButton] = useState('All');
 
-  const handleButtonClick = (buttonLabel: string) => {
+  const handleButtonClick = async (buttonLabel: string) => {
     setActiveButton(buttonLabel);
-    // 这里你可以将选中的按钮信息发送给父组件或者进行其他操作
+    const items = await searchGoal<Goal>(buttonLabel);
+    setGoals(items);
   };
 
   return (
