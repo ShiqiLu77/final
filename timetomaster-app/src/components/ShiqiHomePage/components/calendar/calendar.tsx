@@ -24,7 +24,7 @@ const Calendar: React.FC = () => {
           <DatePicker
             selected={selectedDate}
             onChange={handleDateChange}
-            inline // Show the calendar inline
+            inline={true}
           />
         </div>
         <div className={styles['bottom-div']}>

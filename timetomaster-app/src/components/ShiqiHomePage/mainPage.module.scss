@@ -46,37 +46,56 @@
       line-height: 35px;
       text-align: center;
       width: 100%;
-      position: relative; 
-      top: -2px; 
-      left: 0px; 
+      position: relative;
+      top: -2px;
+      left: 0px;
 
     }
   }
 }
 
 .contentWrapper {
-  margin: 0 4%;
+  margin: 0 3%;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
+  flex-direction: row;
+  width: 94%;
 
+  .goalListContainer{
+    width: 550px;
+    min-width: 550px;
+    margin-right: 10px;
 
-  .goalListContainer {
     .goalList {
       display: flex;
       flex-wrap: wrap;
       justify-content: flex-start;
       gap: 10px;
-      max-width: 1130px;
       margin: 0 auto;
     }
-    width: 70%;
-    min-width: 600px;
+
+  }
+  .goalDetail {
+    width: 0;
+    overflow: hidden;
+    transition: width 0.5s;
+    min-width: 450px;
+    max-width: 450px;
   }
 
   .calendarContainer {
-    min-width: 350px;
+    min-width: 300px;
     width: 22%;
   }
+
+
+
+  .goalListContainer,
+  .calendarContainer,
+  .goalDetail {
+    transition: width 0.5s;
+  }
+
 }
 
 
