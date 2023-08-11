@@ -1,50 +1,41 @@
-.container{
-    width: 100%;
-    padding: 10px;
-    margin: auto;
-} 
 .pageContainer {
     height: 100%;
-    background-color: aqua;
-  }  
+    background-color: #f6f7f2;
+}
 
-.headerContent {
-    display: flex;
-    justify-content: space-between;
+.mainContent {
+    display: flex; /* 使用弹性布局 */
+    flex-direction: column; /* 垂直布局，让子元素从上到下排列 */
     align-items: center;
-    height: 60px;
-    background-color: rgb(3, 95, 78);
-    padding: 3px;
-
-    div{
-        padding: 5px 20px;
-    }
+    justify-content: space-between; /* 在主轴上平均分配剩余空间，将 .footContent 推到底部 */
+    min-height: 100vh; /* 至少占满一屏高度 */
+    background-color: #f6f7f2;
 }
 
 .grid-container {
     display: grid;
-    grid-template-columns: 130px minmax(0, 1fr); // divide to 2 columns, left 200px, right 1fr
-    height: 100vh;
-
-    >.toolbar {
-        background-color: #e2f2da;
-        display: flex;
-        justify-content: center;
-        padding: 10px;
-    }
+    //grid-template-columns: 130px minmax(0, 1fr); // divide to 2 columns, left 200px, right 1fr
+    height: 100%;
+    background-color: #f6f7f2;
+    
 
     >.grid-achievements {
-        background-color: white;
+        background-color: #f6f7f2;
         font-family: Comic Sans MS, cursive;
         display: grid;
         grid-template-rows: 110px minmax(0, 1fr);
         padding: 10px 50px;
+        
 
         .bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 10px 10px;
+            display: flex; /* 添加这个属性使内容垂直居中 */
+
+            justify-content: center;
+            align-items: center;
         }
 
         h1 {
@@ -53,15 +44,24 @@
             margin: 0px;
             width: 300px;
             padding: 10px 30px;
+            display: flex; /* 添加这个属性使内容垂直居中 */
+
+            justify-content: center;
+            align-items: center;
         }
 
         .achievement-container {
             display: flex;
             flex-wrap: wrap;
             align-content: flex-start;
+            justify-content: center;
+            align-items: center;
         }
     }
+
+    
 }
+
 
 .button {
     color: black;
@@ -70,12 +70,12 @@
     font-weight: bolder;
     height: 100px;
 }
-
 .footContent {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 70px;
-    margin: 20px;
     padding: 10px;
-  }
+    background-color: #f6f7f2; /* 添加背景色，与页面背景色一致 */
+    width: 100%; /* 让 .footContent 占满宽度 */
+}
