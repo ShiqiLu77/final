@@ -4,7 +4,7 @@ import Goal from '@/models/goal';
 import Image from 'next/image';
 
 import goalIcon from './goalicon.png'
-import HistogramSmall from './../histoGram/histogramSmall';
+import HistogramSmall from '../histogram/histogramSmall';
 
 interface Props {
   isOpen: boolean;

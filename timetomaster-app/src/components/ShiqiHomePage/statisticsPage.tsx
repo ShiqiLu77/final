@@ -27,7 +27,6 @@ export default function StatisticsPage() {
         { name: 'February', value: 300 },
         { name: 'March', value: 300 },
         { name: 'Apil', value: 300 },
-        // ... 其他月份
       ];
       
 
