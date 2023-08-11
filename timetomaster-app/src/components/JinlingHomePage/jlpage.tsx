@@ -82,9 +82,9 @@ export default function Home() {
       }
       return achievement;
     });
-  
+
     setAchievements(updatedAchievements);
-  
+
     // 找到按顺序的第一个空字符的 achievement，然后更新它
     const firstEmptyAchievement = updatedAchievements.find(achievement => achievement.goalId === completedGoalId);
     if (firstEmptyAchievement && !firstEmptyAchievement.achieved) {
@@ -92,7 +92,7 @@ export default function Home() {
         const timestamp = new Date();
         const timeString = timestamp.toLocaleTimeString([], { hour: 'numeric', minute: 'numeric' });
         const achievedDate = timestamp.toLocaleDateString() + ' ' + timeString;
-  
+
         await updateAchievement(firstEmptyAchievement._id, {
           goalId: completedGoalId, // 使用已完成目标的id
           description: firstEmptyAchievement.description,
@@ -105,7 +105,7 @@ export default function Home() {
       }
     }
   };
-  
+
 
 
 
@@ -276,26 +276,24 @@ export default function Home() {
   return (
     <div className={styles.pageContainer}>
       <Header selectedTab={selectedTab} />
-      <div className={styles["grid-container"]}>
 
-        <div className={styles.toolbar}>
-          <a href="#" className={styles.button} onClick={() => setCreateModalOpen(true)}>  </a>
-        </div>
-
-        <div className={styles["grid-achievements"]}>
-          <div className={styles.bar}>
-            <h1>Achievements</h1>
-
-          </div>
-          <div className={styles["achievement-container"]}>
-            {cards}
-
+      <main className={styles.mainContent}>
+        <div className={styles["grid-container"]}>
+          
+          <div className={styles["grid-achievements"]}>
+            <div className={styles.bar}>
+              <h1>Achievements</h1>
+            </div>
+            <div className={styles["achievement-container"]}>
+              {cards}
+            </div>
           </div>
         </div>
+      </main>
 
-
-
-      </div>
+      <footer className="footer">
+        <div className={styles.footContent}>copyright@ 2023 northeastern university</div>
+      </footer>
 
     </div>
 
