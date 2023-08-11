@@ -29,7 +29,7 @@ export default function goalCard(props: Props) {
     return (
         <div className={styles.goalCard} id={props.goal._id} onClick={handleEdit} >
             <div className={styles.icon}>
-                <Image src={goalIcon} alt="" width={200} height={180} />
+                <Image src={goalIcon} alt="" width={100} height={100} />
             </div>
 
             <div className={styles.goalDetails}>
